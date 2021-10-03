@@ -36,11 +36,13 @@ const Navbar = () => {
 export default Navbar;
 
 const NavContainer = styled.nav`
+  position: absolute;
+  top: 0;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #181818;
+  /* background-color: #181818; */
 
   .inner-container {
     width: 80%;
@@ -48,7 +50,7 @@ const NavContainer = styled.nav`
     align-items: center;
     justify-content: space-between;
     padding: 30px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
     ul {
       display: flex;
@@ -62,7 +64,7 @@ const NavContainer = styled.nav`
           text-decoration: none;
           color: #ffffff;
           text-transform: uppercase;
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 500;
           transition: color 0.2s ease-in-out;
 
