@@ -36,16 +36,16 @@ const Navbar = () => {
 export default Navbar;
 
 const NavContainer = styled.nav`
-  position: absolute;
-  top: 0;
-  width: 100%;
+  /* position: absolute;
+  top: 0; */
+  /* width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: #181818; */
+  background-color: #181818; */
+  width: 100%;
 
   .inner-container {
-    width: 80%;
     display: flex;
     align-items: center;
     justify-content: space-between;

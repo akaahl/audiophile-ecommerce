@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <Navbar />
+      {/* <Navbar /> */}
 
       <Switch>
         <Route path="/" exact>
