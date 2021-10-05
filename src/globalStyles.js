@@ -8,6 +8,12 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Manrope', sans-serif;
     }
+
+    @media (min-width: 2000px) {
+        body {
+            padding: 0 600px;
+        }
+    }
 `;
 
 export default GlobalStyle;

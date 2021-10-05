@@ -3,12 +3,16 @@ import styled from "styled-components";
 import logo from "../../assets/shared/desktop/logo.svg";
 import cartIcon from "../../assets/shared/desktop/icon-cart.svg";
 import { Link } from "react-router-dom";
+import hamburgerIcon from "../../assets/shared/tablet/icon-hamburger.svg";
 
 const Navbar = () => {
   return (
     <NavContainer>
       <div className="inner-container">
-        <img src={logo} alt="audiophile logo" />
+        <div className="left-side">
+          <img src={hamburgerIcon} alt="hamburger" className="mobile-nav" />
+          <img src={logo} alt="audiophile logo" className="logo" />
+        </div>
 
         <ul>
           <li>
@@ -45,6 +49,16 @@ const NavContainer = styled.nav`
     padding: 30px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
+    .left-side {
+      display: flex;
+      align-items: center;
+
+      .mobile-nav {
+        margin-right: 30px;
+        display: none;
+      }
+    }
+
     ul {
       display: flex;
       align-items: center;
@@ -74,6 +88,19 @@ const NavContainer = styled.nav`
       border: none;
       display: grid;
       place-items: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .inner-container {
+      .left-side {
+        .mobile-nav {
+          display: block;
+        }
+      }
+      ul {
+        display: none;
+      }
     }
   }
 `;
