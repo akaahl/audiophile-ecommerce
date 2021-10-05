@@ -44,7 +44,7 @@ const CategoryCard = () => {
 export default CategoryCard;
 
 const StyledCard = styled.div`
-  margin-top: 80px;
+  margin-top: 100px;
   width: 100%;
   height: 400px;
   padding: 0 150px;

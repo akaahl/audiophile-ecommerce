@@ -1,7 +1,8 @@
 import React from "react";
 import Hero from "../components/Home/Hero";
-import CategoryCard from "../components/Home/CategoryCard";
+import CategoryCard from "../components/Shared/CategoryCard";
 import Gallery from "../components/Home/Gallery";
+import CompanyDescription from "../components/Shared/CompanyDescription";
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Hero />
       <CategoryCard />
       <Gallery />
+      <CompanyDescription />
     </div>
   );
 };
