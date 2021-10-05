@@ -32,7 +32,9 @@ const Gallery = () => {
       </div>
 
       <div className="gallery-three">
-        <img src={earphoneImg} alt="earphone" />
+        <div className="img-container">
+          <img src={earphoneImg} alt="earphone" />
+        </div>
 
         <div className="text-content">
           <h4>Yx1 Earphones</h4>
@@ -161,10 +163,16 @@ const StyledGallery = styled.div`
     display: flex;
     justify-content: space-between;
 
-    img {
-      flex: 0.5;
+    .img-container {
+      flex: 0.8;
       border-radius: 8px;
-      object-fit: contain;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        width: 100%;
+        /* object-fit: contain; */
+      }
     }
 
     .text-content {

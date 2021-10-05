@@ -19,7 +19,9 @@ const CompanyDescription = () => {
         </p>
       </div>
 
-      <img src={modelImg} alt="model" />
+      <div className="img-container">
+        <img src={modelImg} alt="model" />
+      </div>
     </StyledContainer>
   );
 };
@@ -27,7 +29,7 @@ const CompanyDescription = () => {
 export default CompanyDescription;
 
 const StyledContainer = styled.div`
-  margin-top: 60px;
+  margin-top: 200px;
   padding: 0 150px;
   display: flex;
   justify-content: space-between;
@@ -38,12 +40,35 @@ const StyledContainer = styled.div`
     margin-right: 30px;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     justify-content: center;
+
+    h2 {
+      text-transform: uppercase;
+      font-size: 40px;
+      width: 90%;
+
+      span {
+        color: #db7d4a;
+      }
+    }
+
+    p {
+      margin-top: 30px;
+      color: #888888;
+      width: 90%;
+      font-size: 15px;
+    }
   }
 
-  img {
+  .img-container {
     flex: 0.5;
     border-radius: 8px;
+    overflow: hidden;
+
+    img {
+      height: 100%;
+      width: 100%;
+      /* object-fit: contain; */
+    }
   }
 `;
