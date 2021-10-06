@@ -278,11 +278,9 @@ const StyledGallery = styled.div`
 
       .img-container {
         flex: 0.5;
-        /* height: 300px; */
 
         img {
           border-radius: 8px;
-          /* object-fit: contain; */
         }
       }
 

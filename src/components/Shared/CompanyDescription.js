@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import modelImg from "../../assets/shared/desktop/image-best-gear.jpg";
+import tabletModelImg from "../../assets/shared/tablet/image-best-gear.jpg";
+import mobileModelImg from "../../assets/shared/mobile/image-best-gear.jpg";
 
 const CompanyDescription = () => {
   return (
@@ -20,7 +22,9 @@ const CompanyDescription = () => {
       </div>
 
       <div className="img-container">
-        <img src={modelImg} alt="model" />
+        <img src={modelImg} alt="model" className="desktop-img" />
+        <img src={tabletModelImg} alt="model" className="tablet-img" />
+        <img src={mobileModelImg} alt="model" className="mobile-img" />
       </div>
     </StyledContainer>
   );
@@ -29,7 +33,7 @@ const CompanyDescription = () => {
 export default CompanyDescription;
 
 const StyledContainer = styled.div`
-  margin-top: 200px;
+  margin-top: 180px;
   padding: 0 150px;
   display: flex;
   justify-content: space-between;
@@ -68,7 +72,64 @@ const StyledContainer = styled.div`
     img {
       height: 100%;
       width: 100%;
-      /* object-fit: contain; */
+    }
+
+    .tablet-img,
+    .mobile-img {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    height: 600px;
+    padding: 0 50px;
+    flex-direction: column-reverse;
+
+    .text-content {
+      margin-right: 0;
+
+      h2 {
+        width: 100%;
+        text-align: center;
+      }
+
+      p {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .img-container {
+      .desktop-img {
+        display: none;
+      }
+
+      .tablet-img {
+        display: block;
+      }
+    }
+  }
+
+  @media (max-width: 425px) {
+    padding: 0 20px;
+    height: auto;
+    margin-top: 120px;
+
+    .text-content {
+      margin-top: 30px;
+      h2 {
+        font-size: 30px;
+      }
+    }
+
+    .img-container {
+      .tablet-img {
+        display: none;
+      }
+
+      .mobile-img {
+        display: block;
+      }
     }
   }
 `;
