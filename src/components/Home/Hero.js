@@ -87,10 +87,6 @@ const HeroContainer = styled.div`
     }
   }
 
-  /* @media (min-width: 2000px) {
-    height: 
-  } */
-
   @media (max-width: 1024px) {
     background-image: url(${tabletHeroBg});
     padding: 0 50px;
@@ -150,7 +146,7 @@ const HeroContainer = styled.div`
   }
 
   @media (max-width: 375px) {
-    padding: 0 20px 100px 20px;
+    padding: 0 20px 50px 20px;
     background-image: url(${mobileHeroBg});
 
     .hero-details {

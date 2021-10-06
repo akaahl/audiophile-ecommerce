@@ -107,4 +107,74 @@ const StyledCard = styled.div`
       }
     }
   }
+
+  @media (min-width: 2000px) {
+    padding: 0;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 100px 50px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 50px;
+    display: block;
+    height: auto;
+
+    ul {
+      flex-direction: column;
+
+      li {
+        width: 100%;
+        height: 230px;
+        /* margin: 70px 0; */
+
+        &:not(:first-child) {
+          margin-top: 90px;
+        }
+
+        .product-img {
+          top: -35%;
+        }
+
+        h4 {
+          margin-top: 100px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 425px) {
+    padding: 20px;
+  }
+
+  @media (max-width: 375px) {
+    ul {
+      li {
+        height: 210px;
+
+        .product-img {
+          height: 220px;
+          width: 220px;
+        }
+
+        h4 {
+          margin-top: 90px;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 768px) and (min-height: 1024px) {
+    ul {
+      flex-direction: row;
+
+      li {
+        &:not(:first-child) {
+          margin-top: 0;
+          margin: 0 20px;
+        }
+      }
+    }
+  }
 `;

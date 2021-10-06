@@ -3,6 +3,8 @@ import styled from "styled-components";
 import speakerImg from "../../assets/home/desktop/image-speaker-zx9.png";
 import circlePattern from "../../assets/home/desktop/pattern-circles.svg";
 import speakerBgImg from "../../assets/home/desktop/image-speaker-zx7.jpg";
+import tabletSpeakerImg from "../../assets/home/tablet/image-speaker-zx7.jpg";
+import mobileSpeakerImg from "../../assets/home/mobile/image-speaker-zx7.jpg";
 import earphoneImg from "../../assets/home/desktop/image-earphones-yx1.jpg";
 import { Link } from "react-router-dom";
 
@@ -31,7 +33,7 @@ const Gallery = () => {
         <button>See product</button>
       </div>
 
-      <div className="gallery-three">
+      {/* <div className="gallery-three">
         <div className="img-container">
           <img src={earphoneImg} alt="earphone" />
         </div>
@@ -40,7 +42,7 @@ const Gallery = () => {
           <h4>Yx1 Earphones</h4>
           <button>See Product</button>
         </div>
-      </div>
+      </div> */}
     </StyledGallery>
   );
 };
@@ -171,7 +173,6 @@ const StyledGallery = styled.div`
       img {
         height: 100%;
         width: 100%;
-        /* object-fit: contain; */
       }
     }
 
@@ -205,5 +206,97 @@ const StyledGallery = styled.div`
         }
       }
     }
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0 50px;
+
+    .gallery-one {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 0;
+
+      .circle-pattern {
+        bottom: 0;
+        left: 50%;
+        top: -50%;
+        transform: translateX(-50%);
+      }
+
+      .speaker-img {
+        height: 250px;
+        width: 200px;
+        position: relative;
+        bottom: 0;
+        left: 0;
+      }
+
+      .text-content {
+        margin: 40px 0 0 0;
+
+        h2 {
+          text-align: center;
+        }
+
+        p {
+          width: 100%;
+          text-align: center;
+        }
+
+        button {
+          display: block;
+          margin: 20px auto;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-one {
+      .speaker-img {
+        height: 200px;
+        width: 180px;
+      }
+      .text-content {
+        width: 300px;
+        h2 {
+          font-size: 40px;
+        }
+      }
+    }
+
+    .gallery-two {
+      background-image: url(${tabletSpeakerImg});
+    }
+  }
+
+  @media (max-width: 425px) {
+    padding: 0 20px;
+
+    .gallery-one {
+      .speaker-img {
+        height: 150px;
+        width: 100px;
+      }
+      .text-content {
+        width: 80%;
+      }
+    }
+
+    .gallery-two {
+      background-image: url(${mobileSpeakerImg});
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 2000px) {
+    padding: 0 20px;
   }
 `;
