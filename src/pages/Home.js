@@ -12,7 +12,7 @@ const Home = () => {
       <CategoryCard />
       <Gallery />
       <CompanyDescription />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

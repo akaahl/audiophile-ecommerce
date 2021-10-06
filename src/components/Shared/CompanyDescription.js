@@ -132,4 +132,8 @@ const StyledContainer = styled.div`
       }
     }
   }
+
+  @media (min-width: 2000px) {
+    padding: 0 20px;
+  }
 `;

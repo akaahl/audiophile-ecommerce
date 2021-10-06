@@ -185,4 +185,85 @@ const StyledFooter = styled.footer`
       }
     }
   }
+
+  @media (max-width: 1024px) {
+    padding: 0 50px 40px 50px;
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+
+      ul {
+        margin-top: 20px;
+
+        li {
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+
+    .text-content {
+      p {
+        flex: 1;
+      }
+      ul {
+        flex: 0;
+        display: none;
+      }
+    }
+
+    .footer-copyright {
+      ul {
+        display: flex;
+      }
+    }
+  }
+
+  @media (max-width: 425px) {
+    margin-top: 100px;
+    padding: 0 20px 40px 20px;
+
+    .orange-line {
+      margin: 0 auto;
+    }
+
+    nav {
+      align-items: center;
+      justify-content: center;
+
+      ul {
+        flex-direction: column;
+
+        li {
+          margin: 15px 0;
+          text-align: center;
+
+          a {
+          }
+        }
+      }
+    }
+
+    .text-content {
+      p {
+        text-align: center;
+      }
+    }
+
+    .footer-copyright {
+      span {
+        text-align: center;
+      }
+
+      flex-direction: column;
+
+      ul {
+        margin-top: 30px;
+      }
+    }
+  }
 `;
