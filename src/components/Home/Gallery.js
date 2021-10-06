@@ -33,7 +33,7 @@ const Gallery = () => {
         <button>See product</button>
       </div>
 
-      {/* <div className="gallery-three">
+      <div className="gallery-three">
         <div className="img-container">
           <img src={earphoneImg} alt="earphone" />
         </div>
@@ -42,7 +42,7 @@ const Gallery = () => {
           <h4>Yx1 Earphones</h4>
           <button>See Product</button>
         </div>
-      </div> */}
+      </div>
     </StyledGallery>
   );
 };
@@ -271,6 +271,30 @@ const StyledGallery = styled.div`
     .gallery-two {
       background-image: url(${tabletSpeakerImg});
     }
+
+    .gallery-three {
+      flex-direction: column;
+      height: 600px;
+
+      .img-container {
+        flex: 0.5;
+        /* height: 300px; */
+
+        img {
+          border-radius: 8px;
+          /* object-fit: contain; */
+        }
+      }
+
+      .text-content {
+        margin: 30px 0 0 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+    }
   }
 
   @media (max-width: 425px) {
@@ -293,6 +317,20 @@ const StyledGallery = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+
+    .gallery-three {
+      height: 400px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .gallery-three {
+      .text-content {
+        h4 {
+          font-size: 20px;
+        }
+      }
     }
   }
 
