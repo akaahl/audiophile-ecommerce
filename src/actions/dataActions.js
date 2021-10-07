@@ -4,7 +4,13 @@ export const fetchData = (dataUrl, cartUrl) => async (dispatch) => {
     fetch(cartUrl).then((val) => val.json()),
   ])
     .then(([data, cart]) => {
-      console.log(data, cart);
+      dispatch({
+        type: "FETCH_DATA",
+        payload: {
+          data,
+          cart,
+        },
+      });
     })
     .catch((err) => console.log(err));
 };

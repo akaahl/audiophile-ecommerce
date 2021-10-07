@@ -31,7 +31,7 @@ const CategoryCard = () => {
                 alt="category card"
               />
               <h4>{category}</h4>
-              <Link>
+              <Link to={`/${category}`}>
                 Shop <img src={arrowRight} alt="arrow" />
               </Link>
             </li>
