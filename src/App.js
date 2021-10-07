@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
 
         <Route path="/:category">
           <CategoryPage />
+        </Route>
+
+        <Route path="/:category/:product">
+          <ProductPage />
         </Route>
       </Switch>
     </div>

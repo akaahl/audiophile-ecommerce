@@ -19,9 +19,9 @@ const CategoryPage = () => {
     <div>
       <Hero category={category} />
       <Items filteredCategory={filteredCategory} />
-      <CategoryCard />
-      <CompanyDescription />
-      <Footer />
+      <CategoryCard params={category} />
+      <CompanyDescription params={category} />
+      <Footer params={category} />
     </div>
   );
 };

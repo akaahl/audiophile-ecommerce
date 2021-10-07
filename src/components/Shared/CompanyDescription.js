@@ -4,9 +4,9 @@ import modelImg from "../../assets/shared/desktop/image-best-gear.jpg";
 import tabletModelImg from "../../assets/shared/tablet/image-best-gear.jpg";
 import mobileModelImg from "../../assets/shared/mobile/image-best-gear.jpg";
 
-const CompanyDescription = () => {
+const CompanyDescription = ({ params }) => {
   return (
-    <StyledContainer>
+    <StyledContainer params={params}>
       <div className="text-content">
         <h2>
           Bringing you the <span>best</span> audio gear
@@ -33,7 +33,7 @@ const CompanyDescription = () => {
 export default CompanyDescription;
 
 const StyledContainer = styled.div`
-  margin-top: 180px;
+  margin-top: ${({ params }) => (params ? "20px" : "180px")};
   padding: 0 150px;
   display: flex;
   justify-content: space-between;
@@ -113,7 +113,7 @@ const StyledContainer = styled.div`
   @media (max-width: 425px) {
     padding: 0 20px;
     height: auto;
-    margin-top: 120px;
+    margin-top: ${({ params }) => (params ? "20px" : "120px")};
 
     .text-content {
       margin-top: 30px;

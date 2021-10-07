@@ -6,9 +6,9 @@ import fbIcon from "../../assets/shared/desktop/icon-facebook.svg";
 import twitterIcon from "../../assets/shared/desktop/icon-twitter.svg";
 import igIcon from "../../assets/shared/desktop/icon-instagram.svg";
 
-const Footer = () => {
+const Footer = ({ params }) => {
   return (
-    <StyledFooter>
+    <StyledFooter params={params}>
       <div className="orange-line"></div>
 
       <nav>
@@ -73,7 +73,7 @@ export default Footer;
 
 const StyledFooter = styled.footer`
   background-color: #101010;
-  margin-top: 200px;
+  margin-top: ${({ params }) => (params ? "120px" : "200px")};
   padding: 0 150px 40px 150px;
 
   .orange-line {

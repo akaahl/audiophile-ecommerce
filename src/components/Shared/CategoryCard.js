@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import arrowRight from "../../assets/shared/desktop/icon-arrow-right.svg";
-const CategoryCard = () => {
-  const params = useParams();
-
+const CategoryCard = ({ params }) => {
   const imgLinks = [
     {
       link: "assets/shared/desktop/image-headphones.png",
@@ -46,7 +44,7 @@ const CategoryCard = () => {
 export default CategoryCard;
 
 const StyledCard = styled.div`
-  margin-top: ${({ params }) => (params ? "100px" : "100px")};
+  margin-top: ${({ params }) => (params ? "50px" : "100px")};
   width: 100%;
   height: 400px;
   padding: 0 150px;
@@ -119,6 +117,7 @@ const StyledCard = styled.div`
   }
 
   @media (max-width: 768px) {
+    margin-top: ${({ params }) => (params ? "30px" : "100px")};
     padding: 50px;
     display: block;
     height: auto;
@@ -132,7 +131,7 @@ const StyledCard = styled.div`
         /* margin: 70px 0; */
 
         &:not(:first-child) {
-          margin-top: 90px;
+          margin-top: 130px;
         }
 
         .product-img {
