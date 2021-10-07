@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
+import { useHistory } from "react-router-dom";
 
-const Items = ({ filteredCategory }) => {
+const Items = ({ filteredCategory, params }) => {
+  const history = useHistory();
+
   return (
     <StyledContainer>
       <ul>
@@ -20,19 +23,15 @@ const Items = ({ filteredCategory }) => {
                   alt={item.category + " showcase"}
                   className="tablet-img"
                 />
-
-                <img
-                  src={process.env.PUBLIC_URL + item.image.mobile}
-                  alt={item.category + " showcase"}
-                  className="mobile-img"
-                />
               </div>
 
               <div className="text-content">
                 <h5>New Product</h5>
                 <h2>{item.name}</h2>
                 <p>{item.description}</p>
-                <button>See Product</button>
+                <button onClick={() => history.push(`/${params}/${item.slug}`)}>
+                  See Product
+                </button>
               </div>
             </li>
           ))}

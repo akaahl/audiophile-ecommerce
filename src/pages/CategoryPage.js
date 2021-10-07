@@ -14,11 +14,12 @@ const CategoryPage = () => {
     .reverse();
 
   console.log(filteredCategory);
+  console.log(category);
 
   return (
     <div>
       <Hero category={category} />
-      <Items filteredCategory={filteredCategory} />
+      <Items filteredCategory={filteredCategory} params={category} />
       <CategoryCard params={category} />
       <CompanyDescription params={category} />
       <Footer params={category} />

@@ -1,5 +1,4 @@
 import GlobalStyle from "./globalStyles";
-import Navbar from "./components/Navbar/Navbar";
 import { Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
@@ -15,11 +14,11 @@ function App() {
           <Home />
         </Route>
 
-        <Route path="/:category">
+        <Route path="/:category" exact>
           <CategoryPage />
         </Route>
 
-        <Route path="/:category/:product">
+        <Route path="/:product/:item">
           <ProductPage />
         </Route>
       </Switch>
