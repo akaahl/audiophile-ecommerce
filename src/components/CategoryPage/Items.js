@@ -7,12 +7,24 @@ const Items = ({ filteredCategory }) => {
     <StyledContainer>
       <ul>
         {filteredCategory &&
-          filteredCategory.map((item, index) => (
+          filteredCategory.map((item) => (
             <li key={uuidv4()} id={item.id}>
               <div className="img-container">
                 <img
                   src={process.env.PUBLIC_URL + item.image.desktop}
                   alt={item.category + " showcase"}
+                  className="desktop-img"
+                />
+                <img
+                  src={process.env.PUBLIC_URL + item.image.tablet}
+                  alt={item.category + " showcase"}
+                  className="tablet-img"
+                />
+
+                <img
+                  src={process.env.PUBLIC_URL + item.image.mobile}
+                  alt={item.category + " showcase"}
+                  className="mobile-img"
                 />
               </div>
 
@@ -60,10 +72,18 @@ const StyledContainer = styled.main`
         height: 100%;
         border-radius: 8px;
         overflow: hidden;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
 
         img {
           height: 100%;
           width: 100%;
+          object-fit: cover;
+        }
+
+        .tablet-img,
+        .mobile-img {
+          display: none;
         }
       }
 
@@ -158,5 +178,41 @@ const StyledContainer = styled.main`
 
   @media (max-width: 768px) {
     padding: 100px 20px;
+
+    ul {
+      li {
+        height: 750px;
+        .img-container {
+          flex: 1;
+          img {
+          }
+          .desktop-img {
+            display: none;
+          }
+
+          .tablet-img {
+            display: block;
+          }
+        }
+
+        .text-content {
+          flex: 0;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 325px) {
+    ul {
+      li {
+        .text-content {
+          width: 100%;
+
+          h2 {
+            font-size: 30px;
+          }
+        }
+      }
+    }
   }
 `;

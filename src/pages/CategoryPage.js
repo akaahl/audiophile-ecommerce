@@ -13,7 +13,7 @@ const CategoryPage = () => {
     .filter((item) => item.category === category)
     .reverse();
 
-  // console.log(filteredCategory.reverse());
+  console.log(filteredCategory);
 
   return (
     <div>
