@@ -71,8 +71,6 @@ const StyledContainer = styled.main`
         height: 100%;
         border-radius: 8px;
         overflow: hidden;
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
 
         img {
           height: 100%;
@@ -107,7 +105,7 @@ const StyledContainer = styled.main`
         p {
           margin-top: 30px;
           color: #4c4c4c;
-          opacity: 0.5;
+          opacity: 0.7;
           font-weight: 400;
         }
 
