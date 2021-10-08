@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import Features from "./Features";
 import Gallery from "./Gallery";
 import RelatedItems from "./RelatedItems";
+import CategoryCard from "../../Shared/CategoryCard";
+import CompanyDescription from "../../Shared/CompanyDescription";
 
 const ItemDetails = () => {
   const slug = useParams().item;
@@ -72,6 +74,8 @@ const ItemDetails = () => {
               <Features features={features} includes={includes} />
               <Gallery gallery={gallery} />
               <RelatedItems others={others} />
+              <CategoryCard itemDetails={true} />
+              <CompanyDescription itemDetails={true} />
             </div>
           )
         )}

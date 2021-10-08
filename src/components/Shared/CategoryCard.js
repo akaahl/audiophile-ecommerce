@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import arrowRight from "../../assets/shared/desktop/icon-arrow-right.svg";
-const CategoryCard = ({ params }) => {
+const CategoryCard = ({ params, itemDetails }) => {
   const imgLinks = [
     {
       link: "assets/shared/desktop/image-headphones.png",
@@ -20,7 +20,7 @@ const CategoryCard = ({ params }) => {
   ];
 
   return (
-    <StyledCard params={params}>
+    <StyledCard params={params} itemDetails={itemDetails}>
       <ul>
         {imgLinks &&
           imgLinks.map(({ link, category }) => (
@@ -44,10 +44,11 @@ const CategoryCard = ({ params }) => {
 export default CategoryCard;
 
 const StyledCard = styled.div`
-  margin-top: ${({ params }) => (params ? "50px" : "100px")};
+  margin-top: ${({ params, itemDetails }) =>
+    params && !itemDetails ? "50px" : itemDetails ? "150px" : "100px"};
   width: 100%;
   height: 400px;
-  padding: 0 150px;
+  padding: ${({ itemDetails }) => (itemDetails ? "0" : "0 150px")};
   display: grid;
   place-items: center;
 
