@@ -21,7 +21,7 @@ export default Gallery;
 
 const StyledGallery = styled.div`
   height: 530px;
-  margin-top: 190px;
+  margin-top: 150px;
   display: flex;
 
   img {
