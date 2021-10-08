@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Features = ({ features, includes }) => {
   const formattedFeatures = features.split(/\r?\n/).filter((val) => val !== "");
-  console.log(formattedFeatures);
+
   return (
     <StyledFeatures>
       <div className="left-side">
@@ -42,13 +42,13 @@ const StyledFeatures = styled.article`
     h3 {
       text-transform: uppercase;
       font-size: 32px;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
     }
 
     p {
       margin-top: 30px;
       color: #888888;
-      opacity: 0.6;
+      opacity: 0.7;
       font-weight: 400;
     }
   }
@@ -56,11 +56,32 @@ const StyledFeatures = styled.article`
   .right-side {
     flex: 0.4;
 
+    h3 {
+      text-transform: uppercase;
+      font-size: 32px;
+      letter-spacing: 2px;
+    }
+
     ul {
       list-style: none;
+      margin-top: 30px;
 
       li {
         display: flex;
+
+        &:not(:first-child) {
+          margin-top: 20px;
+        }
+
+        span {
+          color: #d87d4a;
+        }
+
+        p {
+          color: #888888;
+          margin-left: 20px;
+          opacity: 0.8;
+        }
       }
     }
   }

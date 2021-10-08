@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Features from "./Features";
+import Gallery from "./Gallery";
+import RelatedItems from "./RelatedItems";
 
 const ItemDetails = () => {
   const slug = useParams().item;
@@ -22,7 +24,16 @@ const ItemDetails = () => {
 
       {selectedItem &&
         selectedItem.map(
-          ({ image, name, description, price, features, includes }) => (
+          ({
+            image,
+            name,
+            description,
+            price,
+            features,
+            includes,
+            gallery,
+            others,
+          }) => (
             <div className="item-details">
               <section>
                 <div className="img-container">
@@ -59,6 +70,8 @@ const ItemDetails = () => {
               </section>
 
               <Features features={features} includes={includes} />
+              <Gallery gallery={gallery} />
+              <RelatedItems others={others} />
             </div>
           )
         )}
