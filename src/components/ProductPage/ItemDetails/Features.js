@@ -85,4 +85,40 @@ const StyledFeatures = styled.article`
       }
     }
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .left-side {
+      padding-right: 0;
+      flex: 0.5;
+    }
+
+    .right-side {
+      flex: 0.5;
+      margin-top: 40px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .left-side {
+      h3 {
+        font-size: 30px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+
+    .right-side {
+      h3 {
+        font-size: 30px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
 `;

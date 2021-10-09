@@ -44,8 +44,8 @@ const ItemDetails = () => {
                 price={price}
               />
 
-              {/* <Features features={features} includes={includes} />
-              <Gallery gallery={gallery} />
+              <Features features={features} includes={includes} />
+              {/* <Gallery gallery={gallery} />
               <RelatedItems others={others} />
               <CategoryCard itemDetails={true} />
               <CompanyDescription itemDetails={true} /> */}
