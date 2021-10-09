@@ -6,8 +6,26 @@ const Gallery = ({ gallery }) => {
   return (
     <StyledGallery>
       <div className="left-side">
-        <img src={process.env.PUBLIC_URL + first.desktop} alt="first" />
-        <img src={process.env.PUBLIC_URL + second.desktop} alt="second" />
+        <img
+          src={process.env.PUBLIC_URL + first.desktop}
+          alt="first"
+          className="desktop"
+        />
+        <img
+          src={process.env.PUBLIC_URL + second.desktop}
+          alt="second"
+          className="desktop"
+        />
+        <img
+          src={process.env.PUBLIC_URL + first.tablet}
+          alt="first"
+          className="tablet"
+        />
+        <img
+          src={process.env.PUBLIC_URL + second.tablet}
+          alt="second"
+          className="tablet"
+        />
       </div>
 
       <div className="right-side">
@@ -24,12 +42,6 @@ const StyledGallery = styled.div`
   margin-top: 150px;
   display: flex;
 
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-
   .left-side {
     flex: 0.4;
     height: 100%;
@@ -45,6 +57,10 @@ const StyledGallery = styled.div`
       &:first-child {
         margin-bottom: 30px;
       }
+
+      &.tablet {
+        display: none;
+      }
     }
   }
 
@@ -57,6 +73,39 @@ const StyledGallery = styled.div`
       width: 100%;
       object-fit: cover;
       border-radius: 8px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 110px;
+    flex-direction: column;
+    height: auto;
+
+    .left-side {
+      img {
+        height: 225px;
+
+        &:first-child,
+        &:nth-child(3) {
+          margin-bottom: 15px;
+        }
+
+        &.desktop {
+          display: none;
+        }
+
+        &.tablet {
+          display: block;
+        }
+      }
+    }
+
+    .right-side {
+      margin-top: 15px;
+      margin-left: 0;
+      img {
+        height: 350px;
+      }
     }
   }
 `;

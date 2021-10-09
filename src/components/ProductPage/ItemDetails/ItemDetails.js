@@ -45,8 +45,8 @@ const ItemDetails = () => {
               />
 
               <Features features={features} includes={includes} />
-              {/* <Gallery gallery={gallery} />
-              <RelatedItems others={others} />
+              <Gallery gallery={gallery} />
+              {/* <RelatedItems others={others} />
               <CategoryCard itemDetails={true} />
               <CompanyDescription itemDetails={true} /> */}
             </div>
