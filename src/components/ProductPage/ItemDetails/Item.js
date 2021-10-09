@@ -7,7 +7,16 @@ const Item = ({ image, slug, name, description, price }) => {
   return (
     <StyledSection>
       <div className="img-container">
-        <img src={process.env.PUBLIC_URL + image.desktop} alt={slug} />
+        <img
+          src={process.env.PUBLIC_URL + image.desktop}
+          alt={slug}
+          className="desktop"
+        />
+        <img
+          src={process.env.PUBLIC_URL + image.tablet}
+          alt={slug}
+          className="tablet"
+        />
       </div>
 
       <div className="text-content">
@@ -51,11 +60,10 @@ const StyledSection = styled.section`
       height: 100%;
       width: 100%;
       object-fit: cover;
-    }
 
-    .tablet-img,
-    .mobile-img {
-      display: none;
+      &.tablet {
+        display: none;
+      }
     }
   }
 
@@ -137,6 +145,58 @@ const StyledSection = styled.section`
         &:hover {
           background-color: #fbaf85;
           color: #000000;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: 800px;
+
+    .img-container {
+      width: 100%;
+      flex: 1;
+      height: 350px;
+
+      img {
+        &.desktop {
+          display: none;
+        }
+
+        &.tablet {
+          display: block;
+        }
+      }
+    }
+
+    .text-content {
+      margin-left: 0;
+      margin-top: 50px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .text-content {
+      h2 {
+        font-size: 30px;
+      }
+
+      .description {
+        font-size: 14px;
+      }
+
+      .add-to-cart {
+        flex-direction: column;
+
+        .quantity {
+          width: 100%;
+        }
+
+        .add-to-cart-btn {
+          width: 100%;
+          margin-left: 0;
+          margin-top: 30px;
         }
       }
     }

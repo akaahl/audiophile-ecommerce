@@ -44,11 +44,11 @@ const ItemDetails = () => {
                 price={price}
               />
 
-              <Features features={features} includes={includes} />
+              {/* <Features features={features} includes={includes} />
               <Gallery gallery={gallery} />
               <RelatedItems others={others} />
               <CategoryCard itemDetails={true} />
-              <CompanyDescription itemDetails={true} />
+              <CompanyDescription itemDetails={true} /> */}
             </div>
           )
         )}
@@ -75,5 +75,13 @@ const StyledContainer = styled.main`
     &:hover {
       color: #d87d4a;
     }
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0 50px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
   }
 `;
