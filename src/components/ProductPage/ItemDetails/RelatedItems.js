@@ -75,4 +75,49 @@ const StyledContainer = styled.aside`
       }
     }
   }
+
+  @media (max-width: 768px) {
+    ul {
+      flex-direction: column;
+
+      li {
+        width: 60%;
+
+        &:not(:first-child) {
+          margin-top: 60px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 425px) {
+    ul {
+      li {
+        width: 100%;
+
+        h5,
+        button {
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 320px) {
+    h3 {
+      font-size: 28px;
+    }
+
+    ul {
+      li {
+        h5 {
+          font-size: 20px;
+        }
+
+        button {
+          padding: 10px 20px;
+        }
+      }
+    }
+  }
 `;
