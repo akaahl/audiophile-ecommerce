@@ -21,3 +21,13 @@ export const fetchData = (dataUrl, cartUrl) => async (dispatch) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const updateCart = (cart) => async (dispatch) => {
+  console.log(cart);
+  dispatch({
+    type: "UPDATE_CART",
+    payload: {
+      cart,
+    },
+  });
+};

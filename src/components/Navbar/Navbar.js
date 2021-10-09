@@ -31,6 +31,7 @@ const Navbar = () => {
 
         <button>
           <img src={cartIcon} alt="cart" />
+          <span>2</span>
         </button>
       </div>
     </NavContainer>
@@ -83,11 +84,25 @@ const NavContainer = styled.nav`
     }
 
     button {
+      position: relative;
       cursor: pointer;
       background: none;
       border: none;
       display: grid;
       place-items: center;
+      z-index: 10;
+
+      span {
+        top: -15px;
+        right: -15px;
+        padding: 3px 7px;
+        border-radius: 50%;
+        background-color: #d87d4a;
+        color: #ffffff;
+        font-weight: 600;
+        position: absolute;
+        z-index: 1;
+      }
     }
   }
 

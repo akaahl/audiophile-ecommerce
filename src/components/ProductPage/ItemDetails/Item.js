@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import checkMark from "../../../assets/shared/desktop/check-mark.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCart } from "../../../actions/dataActions";
 
 const Item = ({ image, slug, name, description, price }) => {
+  const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const [addToCart, setAddToCart] = useState(false);
+  const allData = useSelector((state) => state.allData);
+  const cart = allData.cart;
 
   const handleClick = (e) => {
     e.preventDefault();
     setAddToCart(true);
+    // dispatchEvent(updateData(quantity));
+    const updatedCart = cart.map((item) =>
+      item.name === name ? { ...item, quantity } : item
+    );
+
+    dispatch(updateCart(updatedCart));
 
     setTimeout(() => {
       setAddToCart(false);
@@ -50,6 +62,7 @@ const Item = ({ image, slug, name, description, price }) => {
 
           {addToCart && (
             <div className="notifications">
+              <img src={checkMark} alt="check mark" />
               <p>
                 You have added <span>{quantity}</span> unit
                 {quantity > 1 ? "s" : ""} of <span>{name}</span>
@@ -176,9 +189,16 @@ const StyledSection = styled.section`
         left: 20px;
         border-radius: 8px;
         background-color: #ffffff;
-        padding: 15px;
-        box-shadow: 4px 2px 25px rgba(0, 0, 0, 0.2);
+        padding: 15px 20px 15px 15px;
+        box-shadow: 4px 4px 35px rgba(0, 0, 0, 0.1);
         background-color: #d87d4a;
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-right: 10px;
+        }
+
         p {
           color: #ffffff;
           font-weight: 600;

@@ -44,6 +44,7 @@ const ItemDetails = ({ params }) => {
                 name={name}
                 description={description}
                 price={price}
+                slug={slug}
               />
 
               <Features features={features} includes={includes} />
