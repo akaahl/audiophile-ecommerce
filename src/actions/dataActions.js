@@ -4,6 +4,13 @@ export const fetchData = (dataUrl, cartUrl) => async (dispatch) => {
     fetch(cartUrl).then((val) => val.json()),
   ])
     .then(([data, cart]) => {
+      const storageData = {
+        data,
+        cart,
+      };
+
+      localStorage.setItem("storage", JSON.stringify(storageData));
+
       dispatch({
         type: "FETCH_DATA",
         payload: {

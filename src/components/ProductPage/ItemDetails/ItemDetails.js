@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import Features from "./Features";
 import Gallery from "./Gallery";
 import RelatedItems from "./RelatedItems";
@@ -13,8 +13,11 @@ import { v4 as uuidv4 } from "uuid";
 const ItemDetails = ({ params }) => {
   const slug = useParams().item;
   const history = useHistory();
-  const selectedItem = useSelector((state) =>
-    state.allData.data.filter((item) => item.slug === slug)
+  // const selectedItem = useSelector((state) =>
+  //   state.allData.data.filter((item) => item.slug === slug)
+  // );
+  const selectedItem = JSON.parse(localStorage.getItem("storage")).data.filter(
+    (item) => item.slug === slug
   );
 
   return (

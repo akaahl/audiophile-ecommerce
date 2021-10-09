@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Hero from "../components/CategoryPage/Hero";
 import Items from "../components/CategoryPage/Items";
 import CategoryCard from "../components/Shared/CategoryCard";
 import CompanyDescription from "../components/Shared/CompanyDescription";
 import Footer from "../components/Shared/Footer";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchData } from "../actions/dataActions";
 
 const CategoryPage = () => {
-  const category = useParams().category;
-  const filteredCategory = useSelector((state) => state.allData.data)
-    .filter((item) => item.category === category)
-    .reverse();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const dataUrl = "data.json";
+    const cartUrl = "cart.json";
 
-  console.log(filteredCategory);
-  console.log(category);
+    dispatch(fetchData(dataUrl, cartUrl));
+  }, [dispatch]);
+
+  const category = useParams().category;
+  // const filteredCategory = useSelector((state) => state.allData.data)
+  //   .filter((item) => item.category === category)
+  //   .reverse();
+
+  const filteredCategory = JSON.parse(localStorage.getItem("storage"))
+    .data.filter((item) => item.category === category)
+    .reverse();
 
   return (
     <div>
