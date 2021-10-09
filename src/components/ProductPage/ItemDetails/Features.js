@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 const Features = ({ features, includes }) => {
   const formattedFeatures = features.split(/\r?\n/).filter((val) => val !== "");
@@ -9,7 +10,7 @@ const Features = ({ features, includes }) => {
       <div className="left-side">
         <h3>Features</h3>
         {formattedFeatures &&
-          formattedFeatures.map((feature) => <p>{feature}</p>)}
+          formattedFeatures.map((feature) => <p key={uuidv4()}>{feature}</p>)}
       </div>
 
       <div className="right-side">
@@ -18,7 +19,7 @@ const Features = ({ features, includes }) => {
         <ul>
           {includes &&
             includes.map(({ item, quantity }) => (
-              <li>
+              <li key={uuidv4()}>
                 <span>{quantity}x</span>
                 <p>{item}</p>
               </li>

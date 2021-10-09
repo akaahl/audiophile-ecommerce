@@ -6,9 +6,11 @@ import speakerBgImg from "../../assets/home/desktop/image-speaker-zx7.jpg";
 import tabletSpeakerImg from "../../assets/home/tablet/image-speaker-zx7.jpg";
 import mobileSpeakerImg from "../../assets/home/mobile/image-speaker-zx7.jpg";
 import earphoneImg from "../../assets/home/desktop/image-earphones-yx1.jpg";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Gallery = () => {
+  const history = useHistory();
+
   return (
     <StyledGallery>
       <div className="gallery-one">
@@ -24,13 +26,17 @@ const Gallery = () => {
             Upgrade to premium speakers that are phenomenally built to deliver
             truly remarkable sound.
           </p>
-          <button>See Product</button>
+          <button onClick={() => history.push("/speakers/zx9-speaker")}>
+            See Product
+          </button>
         </div>
       </div>
 
       <div className="gallery-two">
         <h4>Zx7 Speaker</h4>
-        <button>See product</button>
+        <button onClick={() => history.push("/speakers/zx7-speaker")}>
+          See product
+        </button>
       </div>
 
       <div className="gallery-three">
@@ -40,7 +46,9 @@ const Gallery = () => {
 
         <div className="text-content">
           <h4>Yx1 Earphones</h4>
-          <button>See Product</button>
+          <button onClick={() => history.push("/speakers/yx1-earphones")}>
+            See Product
+          </button>
         </div>
       </div>
     </StyledGallery>

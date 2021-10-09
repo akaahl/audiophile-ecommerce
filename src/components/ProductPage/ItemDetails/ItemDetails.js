@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -8,15 +8,14 @@ import RelatedItems from "./RelatedItems";
 import CategoryCard from "../../Shared/CategoryCard";
 import CompanyDescription from "../../Shared/CompanyDescription";
 import Item from "./Item";
+import { v4 as uuidv4 } from "uuid";
 
-const ItemDetails = () => {
+const ItemDetails = ({ params }) => {
   const slug = useParams().item;
   const history = useHistory();
   const selectedItem = useSelector((state) =>
     state.allData.data.filter((item) => item.slug === slug)
   );
-
-  console.log(selectedItem);
 
   return (
     <StyledContainer>
@@ -36,7 +35,7 @@ const ItemDetails = () => {
             gallery,
             others,
           }) => (
-            <div className="item-details">
+            <div className="item-details" key={uuidv4()}>
               <Item
                 image={image}
                 name={name}
@@ -46,9 +45,9 @@ const ItemDetails = () => {
 
               <Features features={features} includes={includes} />
               <Gallery gallery={gallery} />
-              <RelatedItems others={others} />
-              {/* <CategoryCard itemDetails={true} />
-              <CompanyDescription itemDetails={true} /> */}
+              <RelatedItems others={others} params={params} />
+              <CategoryCard itemDetails={true} />
+              <CompanyDescription itemDetails={true} />
             </div>
           )
         )}

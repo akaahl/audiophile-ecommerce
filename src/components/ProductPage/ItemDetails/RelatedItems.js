@@ -1,17 +1,32 @@
 import React from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
-const RelatedItems = ({ others }) => {
+const RelatedItems = ({ others, params }) => {
+  const history = useHistory();
+
+  const handleClick = (slug) => {
+    history.push(`/${params}/${slug}`);
+  };
+
   return (
     <StyledContainer>
       <h3>You may also like</h3>
 
       <ul>
         {others.map(({ image, name, slug }) => (
-          <li>
+          <li key={uuidv4()}>
             <img src={process.env.PUBLIC_URL + image.desktop} alt="desktop" />
             <h5>{name}</h5>
-            <button>See product</button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                handleClick(slug);
+              }}
+            >
+              See product
+            </button>
           </li>
         ))}
       </ul>
