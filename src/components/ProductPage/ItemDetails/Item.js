@@ -3,6 +3,16 @@ import styled from "styled-components";
 
 const Item = ({ image, slug, name, description, price }) => {
   const [quantity, setQuantity] = useState(1);
+  const [addToCart, setAddToCart] = useState(false);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setAddToCart(true);
+
+    setTimeout(() => {
+      setAddToCart(false);
+    }, 1500);
+  };
 
   return (
     <StyledSection>
@@ -34,7 +44,18 @@ const Item = ({ image, slug, name, description, price }) => {
             <button onClick={() => setQuantity((q) => q + 1)}>+</button>
           </div>
 
-          <button className="add-to-cart-btn">Add to cart</button>
+          <button className="add-to-cart-btn" onClick={handleClick}>
+            Add to cart
+          </button>
+
+          {addToCart && (
+            <div className="notifications">
+              <p>
+                You have added <span>{quantity}</span> unit
+                {quantity > 1 ? "s" : ""} of <span>{name}</span>
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </StyledSection>
@@ -100,6 +121,7 @@ const StyledSection = styled.section`
     }
 
     .add-to-cart {
+      position: relative;
       margin-top: 40px;
       display: flex;
       align-items: center;
@@ -145,6 +167,22 @@ const StyledSection = styled.section`
         &:hover {
           background-color: #fbaf85;
           color: #000000;
+        }
+      }
+
+      .notifications {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        border-radius: 8px;
+        background-color: #ffffff;
+        padding: 15px;
+        box-shadow: 4px 2px 25px rgba(0, 0, 0, 0.2);
+        background-color: #d87d4a;
+        p {
+          color: #ffffff;
+          font-weight: 600;
+          font-size: 16px;
         }
       }
     }
