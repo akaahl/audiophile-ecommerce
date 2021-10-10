@@ -1,24 +1,27 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import checkMark from "../../../assets/shared/desktop/check-mark.svg";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateCart } from "../../../actions/dataActions";
 
 const Item = ({ image, slug, name, description, price }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const [addToCart, setAddToCart] = useState(false);
-  const allData = useSelector((state) => state.allData);
+  const allData = JSON.parse(localStorage.getItem("storage"));
   const cart = allData.cart;
 
   const handleClick = (e) => {
     e.preventDefault();
     setAddToCart(true);
-    // dispatchEvent(updateData(quantity));
     const updatedCart = cart.map((item) =>
-      item.name === name ? { ...item, quantity } : item
+      item.name === name
+        ? { ...item, quantity: (item.quantity += quantity) }
+        : { ...item }
     );
 
+    const newAllData = { ...allData, cart: updatedCart };
+    localStorage.setItem("storage", JSON.stringify(newAllData));
     dispatch(updateCart(updatedCart));
 
     setTimeout(() => {
