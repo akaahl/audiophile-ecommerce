@@ -22,11 +22,12 @@ export const fetchData = (dataUrl, cartUrl) => async (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const updateCart = (cart) => async (dispatch) => {
+export const updateCart = (cart, totalItem) => async (dispatch) => {
   dispatch({
     type: "UPDATE_CART",
     payload: {
       cart,
+      total: totalItem,
     },
   });
 };

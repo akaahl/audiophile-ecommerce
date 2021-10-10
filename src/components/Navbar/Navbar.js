@@ -4,8 +4,11 @@ import logo from "../../assets/shared/desktop/logo.svg";
 import cartIcon from "../../assets/shared/desktop/icon-cart.svg";
 import { Link } from "react-router-dom";
 import hamburgerIcon from "../../assets/shared/tablet/icon-hamburger.svg";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const totalItem = useSelector((state) => state.allData).total;
+
   return (
     <NavContainer>
       <div className="inner-container">
@@ -31,7 +34,7 @@ const Navbar = () => {
 
         <button>
           <img src={cartIcon} alt="cart" />
-          <span>2</span>
+          <span>{totalItem}</span>
         </button>
       </div>
     </NavContainer>
