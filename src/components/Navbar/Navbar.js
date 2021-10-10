@@ -10,7 +10,7 @@ const Navbar = () => {
   const totalItem = useSelector((state) => state.allData).total;
 
   return (
-    <NavContainer>
+    <NavContainer totalItem={totalItem}>
       <div className="inner-container">
         <div className="left-side">
           <img src={hamburgerIcon} alt="hamburger" className="mobile-nav" />
@@ -34,7 +34,7 @@ const Navbar = () => {
 
         <button>
           <img src={cartIcon} alt="cart" />
-          <span>{totalItem}</span>
+          {totalItem && <span>{totalItem}</span>}
         </button>
       </div>
     </NavContainer>
@@ -98,7 +98,8 @@ const NavContainer = styled.nav`
       span {
         top: -15px;
         right: -15px;
-        padding: 3px 7px;
+        padding: ${({ totalItem }) =>
+          totalItem > 10 ? "3px 7px" : "3px 10px"};
         border-radius: 50%;
         background-color: #d87d4a;
         color: #ffffff;

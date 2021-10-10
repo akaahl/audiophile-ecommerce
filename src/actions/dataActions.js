@@ -7,6 +7,7 @@ export const fetchData = (dataUrl, cartUrl) => async (dispatch) => {
       const storageData = {
         data,
         cart,
+        total: 0,
       };
 
       localStorage.setItem("storage", JSON.stringify(storageData));
@@ -16,18 +17,20 @@ export const fetchData = (dataUrl, cartUrl) => async (dispatch) => {
         payload: {
           data,
           cart,
+          total: storageData.total,
         },
       });
     })
     .catch((err) => console.log(err));
 };
 
-export const updateCart = (cart, totalItem) => async (dispatch) => {
+export const updateData = (data) => async (dispatch) => {
   dispatch({
     type: "UPDATE_CART",
     payload: {
-      cart,
-      total: totalItem,
+      data: data.data,
+      cart: data.cart,
+      total: data.total,
     },
   });
 };

@@ -4,7 +4,7 @@ import CategoryCard from "../components/Shared/CategoryCard";
 import Gallery from "../components/Home/Gallery";
 import CompanyDescription from "../components/Shared/CompanyDescription";
 import Footer from "../components/Shared/Footer";
-import { fetchData } from "../actions/dataActions";
+import { fetchData, updateData } from "../actions/dataActions";
 import { useDispatch } from "react-redux";
 
 const Home = () => {
@@ -13,8 +13,13 @@ const Home = () => {
   useEffect(() => {
     const dataUrl = "data.json";
     const cartUrl = "cart.json";
+    const allData = JSON.parse(localStorage.getItem("storage"));
 
-    dispatch(fetchData(dataUrl, cartUrl));
+    if (allData) {
+      dispatch(updateData(allData));
+    } else {
+      dispatch(fetchData(dataUrl, cartUrl));
+    }
   }, [dispatch]);
   return (
     <div>

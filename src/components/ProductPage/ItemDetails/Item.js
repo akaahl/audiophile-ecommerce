@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import checkMark from "../../../assets/shared/desktop/check-mark.svg";
 import { useDispatch } from "react-redux";
-import { updateCart } from "../../../actions/dataActions";
+import { updateData } from "../../../actions/dataActions";
 
 const Item = ({ image, slug, name, description, price }) => {
   const dispatch = useDispatch();
@@ -25,9 +25,9 @@ const Item = ({ image, slug, name, description, price }) => {
       0
     );
 
-    const newAllData = { ...allData, cart: updatedCart };
+    const newAllData = { ...allData, cart: updatedCart, total: totalItem };
     localStorage.setItem("storage", JSON.stringify(newAllData));
-    dispatch(updateCart(updatedCart, totalItem));
+    dispatch(updateData(newAllData));
 
     setTimeout(() => {
       setAddToCart(false);
