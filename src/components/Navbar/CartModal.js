@@ -64,15 +64,15 @@ const StyledModal = styled.aside`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
 
   .modal-container {
     position: fixed;
-    right: 200px;
+    right: 10%;
     top: 50px;
     width: 400px;
     background-color: #ffffff;
-    padding: 20px 25px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     border-radius: 8px;
@@ -146,8 +146,10 @@ const StyledModal = styled.aside`
         p {
           flex: calc(100 / 3);
           color: #000000;
-          padding: 8px 12px;
+          padding: 8px 0;
           font-size: 14px;
+          display: grid;
+          place-items: center;
         }
 
         p {
@@ -179,10 +181,77 @@ const StyledModal = styled.aside`
       border: none;
       background-color: #d87d4a;
       padding: 12px 20px;
-      font-size: 16px;
+      font-size: 15px;
+      letter-spacing: 1px;
       font-weight: 600;
       color: #ffffff;
       text-transform: uppercase;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .modal-container {
+      width: 350px;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .modal-container {
+      position: relative;
+      top: 0;
+      right: 0;
+      width: 90%;
+      margin: 50px auto 0 auto;
+      padding: 25px 15px;
+    }
+  }
+
+  @media (max-width: 325px) {
+    .modal-container {
+      .top {
+        h3,
+        button {
+          font-size: 14px;
+        }
+      }
+
+      .mid {
+        .mid-left {
+          img {
+            height: 40px;
+            width: 40px;
+          }
+
+          .mid-left-details {
+            .display-name,
+            .price {
+              font-size: 12px;
+            }
+          }
+        }
+
+        .mid-right {
+          width: 80px;
+          button,
+          p {
+            padding: 5px 0;
+            font-size: 12px;
+          }
+        }
+      }
+
+      .bottom {
+        margin-top: 30px;
+        .total-text,
+        .total-display {
+          font-size: 14px;
+        }
+      }
+
+      .checkout-btn {
+        padding: 10px 18px;
+        font-size: 14px;
+      }
     }
   }
 `;
