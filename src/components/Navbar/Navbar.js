@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../../assets/shared/desktop/logo.svg";
 import cartIcon from "../../assets/shared/desktop/icon-cart.svg";
 import { Link } from "react-router-dom";
 import hamburgerIcon from "../../assets/shared/tablet/icon-hamburger.svg";
 import { useSelector } from "react-redux";
+import CartModal from "./CartModal";
 
 const Navbar = () => {
   const totalItem = useSelector((state) => state.allData).total;
+  const [modal, setModal] = useState(false);
 
   return (
     <NavContainer totalItem={totalItem}>
@@ -32,10 +34,12 @@ const Navbar = () => {
           </li>
         </ul>
 
-        <button>
+        <button onClick={() => setModal(true)}>
           <img src={cartIcon} alt="cart" />
           {totalItem && <span>{totalItem}</span>}
         </button>
+
+        {modal && <CartModal setModal={setModal} />}
       </div>
     </NavContainer>
   );
