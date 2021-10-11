@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import codIcon from "../../assets/shared/desktop/icon-cash-on-delivery.svg";
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 const InnerForm = () => {
+  const cart = useSelector((state) => state.allData.cart);
+
   return (
     <StyledInnerForm>
       <div className="left-side">
@@ -145,28 +150,73 @@ const InnerForm = () => {
           </div>
 
           <div className="bottom">
-            <div className="e-money-details">
+            {/* <div className="e-money-details">
               <div className="e-money-number">
-                <label htmlFor="number">e-Money Number</label>
+                <div className="top">
+                  <label htmlFor="number">e-Money Number</label>
+                  <small>Field cannot be empty</small>
+                </div>
+
                 <input
                   type="text"
                   name="number"
                   id="number"
                   placeholder="238521993"
+                  className="input-el"
                 />
               </div>
 
               <div className="e-money-pin">
-                <label htmlFor="pin">e-Money PIN</label>
-                <input type="text" name="pin" id="pin" placeholder="6891" />
+                <div className="top">
+                  <label htmlFor="pin">e-Money PIN</label>
+                  <small>Field cannot be empty</small>
+                </div>
+                <input
+                  type="text"
+                  name="pin"
+                  id="pin"
+                  placeholder="6891"
+                  className="input-el"
+                />
               </div>
-            </div>
+            </div> */}
+
+            {/* <div className="cod-details">
+              <img src={codIcon} alt="cash on delivery" />
+              <p>
+                The ‘Cash on Delivery’ option enables you to pay in cash when
+                our delivery courier arrives at your residence. Just make sure
+                your address is correct so that your order will not be
+                cancelled.
+              </p>
+            </div> */}
           </div>
         </div>
       </div>
 
       <div className="right-side">
         <h2>Summary</h2>
+
+        <ul>
+          {cart &&
+            cart.map((item) => (
+              <li key={uuidv4()}>
+                <div className="left-side">
+                  <img
+                    src={process.env.PUBLIC_URL + item.image}
+                    alt={item.name}
+                  />
+
+                  <div className="item-details">
+                    <p>{item.displayName}</p>
+                    <span>{item.price.toLocaleString()}</span>
+                  </div>
+                </div>
+
+                <span>{item.quantity}</span>
+              </li>
+            ))}
+        </ul>
       </div>
     </StyledInnerForm>
   );
@@ -394,6 +444,8 @@ const StyledInnerForm = styled.div`
 
             label {
               margin-left: 15px;
+              font-weight: 700;
+              font-size: 14px;
             }
           }
         }
@@ -407,13 +459,52 @@ const StyledInnerForm = styled.div`
           align-items: center;
           justify-content: space-between;
 
-          .e-money-number {
+          .e-money-number,
+          .e-money-pin {
             flex: 0.5;
+
+            .top {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+
+              label {
+                font-weight: 700;
+                color: #000000;
+                font-size: 14px;
+              }
+
+              small {
+                display: none;
+                color: orangered;
+                font-size: 12px;
+                font-weight: 400;
+              }
+            }
+
+            .input-el {
+              margin-top: 10px;
+              width: 100%;
+              border-radius: 5px;
+              padding: 15px;
+              border: 1px solid rgba(0, 0, 0, 0.2);
+            }
           }
 
           .e-money-pin {
-            flex: 0.5;
             margin-left: 15px;
+          }
+        }
+
+        .cod-details {
+          display: flex;
+          align-items: center;
+
+          p {
+            flex: 1;
+            margin-left: 40px;
+            color: #191919;
+            opacity: 0.6;
           }
         }
       }
@@ -426,5 +517,32 @@ const StyledInnerForm = styled.div`
     padding: 25px;
     flex: 0.3;
     margin-left: 30px;
+
+    h2 {
+      text-transform: uppercase;
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .left-side {
+          margin-top: 25px;
+          display: flex;
+          align-items: center;
+          padding: 0;
+
+          img {
+            height: 80px;
+            width: 80px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
   }
 `;
