@@ -116,6 +116,53 @@ const InnerForm = () => {
             </div>
           </div>
         </div>
+
+        <div className="payment">
+          <h4>Payment Details</h4>
+
+          <div className="top">
+            <span>Payment Method</span>
+
+            <div className="payment-methods">
+              <div className="payment-method">
+                <input
+                  type="radio"
+                  name="method"
+                  id="e-money"
+                  value="e-money"
+                  checked
+                />
+                <div className="checkmark"></div>
+                <label htmlFor="e-money">e-Money</label>
+              </div>
+
+              <div className="payment-method">
+                <input type="radio" name="method" id="cod" value="cod" />
+                <div className="checkmark"></div>
+                <label htmlFor="cod">Cash on Delivery</label>
+              </div>
+            </div>
+          </div>
+
+          <div className="bottom">
+            <div className="e-money-details">
+              <div className="e-money-number">
+                <label htmlFor="number">e-Money Number</label>
+                <input
+                  type="text"
+                  name="number"
+                  id="number"
+                  placeholder="238521993"
+                />
+              </div>
+
+              <div className="e-money-pin">
+                <label htmlFor="pin">e-Money PIN</label>
+                <input type="text" name="pin" id="pin" placeholder="6891" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="right-side">
@@ -270,6 +317,103 @@ const StyledInnerForm = styled.div`
             border-radius: 5px;
             padding: 15px;
             border: 1px solid rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+    }
+
+    .payment {
+      margin-top: 30px;
+
+      h4 {
+        text-transform: uppercase;
+        color: #d87d4a;
+        letter-spacing: 1px;
+        font-size: 16px;
+      }
+
+      .top {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+
+        span {
+          flex: 0.5;
+          font-weight: 700;
+          color: #000000;
+          font-size: 14px;
+        }
+
+        .payment-methods {
+          flex: 0.5;
+          margin-left: 15px;
+
+          .payment-method {
+            width: 100%;
+            border-radius: 5px;
+            padding: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            &:nth-child(2) {
+              margin-top: 15px;
+            }
+
+            .checkmark {
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              border: 1px solid rgba(0, 0, 0, 0.2);
+
+              position: relative;
+
+              &::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                height: 0px;
+                width: 0px;
+                border-radius: 50%;
+                background-color: #d87d4a;
+                transition: all 0.4s ease-in-out;
+              }
+            }
+
+            input[type="radio"] {
+              display: none;
+
+              &:checked ~ .checkmark::after {
+                height: 10px;
+                width: 10px;
+              }
+            }
+
+            label {
+              margin-left: 15px;
+            }
+          }
+        }
+      }
+
+      .bottom {
+        margin-top: 40px;
+
+        .e-money-details {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .e-money-number {
+            flex: 0.5;
+          }
+
+          .e-money-pin {
+            flex: 0.5;
+            margin-left: 15px;
           }
         }
       }
