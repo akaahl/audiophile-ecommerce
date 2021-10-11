@@ -143,6 +143,12 @@ const StyledModal = styled.aside`
         opacity: 0.7;
         font-size: 16px;
         text-decoration: underline;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          color: #d87d4a;
+          opacity: 1;
+        }
       }
     }
 
@@ -241,6 +247,13 @@ const StyledModal = styled.aside`
       font-weight: 600;
       color: #ffffff;
       text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #fbaf85;
+        color: #000000;
+      }
     }
   }
 
