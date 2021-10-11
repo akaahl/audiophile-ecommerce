@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDom from "react-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
@@ -22,54 +23,38 @@ const CartModal = ({ setModal }) => {
   };
 
   const handleQuantity = (sign, quantity, name) => {
-    if (sign === "+") {
-      const updatedQuantity = (quantity += 1);
-      const allData = JSON.parse(localStorage.getItem("storage"));
-      const updatedCart = allData.cart.map((item) =>
-        item.name === name
-          ? { ...item, quantity: updatedQuantity }
-          : { ...item }
-      );
-      const totalItem = updatedCart.reduce(
-        (acc, val) => (acc += val.quantity),
-        0
-      );
-      const updatedAllData = {
-        ...allData,
-        cart: updatedCart,
-        total: totalItem,
-      };
-      localStorage.setItem("storage", JSON.stringify(updatedAllData));
-      dispatch(updateData(updatedAllData));
-    }
-
-    if (sign === "-") {
-      const updatedQuantity = (quantity -= 1);
-      const allData = JSON.parse(localStorage.getItem("storage"));
-      const updatedCart = allData.cart.map((item) =>
-        item.name === name
-          ? { ...item, quantity: updatedQuantity }
-          : { ...item }
-      );
-      const totalItem = updatedCart.reduce(
-        (acc, val) => (acc += val.quantity),
-        0
-      );
-      const updatedAllData = {
-        ...allData,
-        cart: updatedCart,
-        total: totalItem,
-      };
-      localStorage.setItem("storage", JSON.stringify(updatedAllData));
-      dispatch(updateData(updatedAllData));
-    }
+    const updatedQuantity = sign === "+" ? (quantity += 1) : (quantity -= 1);
+    const allData = JSON.parse(localStorage.getItem("storage"));
+    const updatedCart = allData.cart.map((item) =>
+      item.name === name ? { ...item, quantity: updatedQuantity } : { ...item }
+    );
+    const totalItem = updatedCart.reduce(
+      (acc, val) => (acc += val.quantity),
+      0
+    );
+    const updatedAllData = {
+      ...allData,
+      cart: updatedCart,
+      total: totalItem,
+    };
+    localStorage.setItem("storage", JSON.stringify(updatedAllData));
+    dispatch(updateData(updatedAllData));
   };
-  return (
+
+  const handleRemoveAll = (e) => {
+    e.preventDefault();
+    const allData = JSON.parse(localStorage.getItem("storage"));
+    const removedCart = allData.cart.map((item) => ({ ...item, quantity: 0 }));
+    const updatedAllData = { ...allData, cart: removedCart, total: 0 };
+    localStorage.setItem("storage", JSON.stringify(updatedAllData));
+    dispatch(updateData(updatedAllData));
+  };
+  return ReactDom.createPortal(
     <StyledModal onClick={handleModal}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <div className="top">
           <h3>Cart ({totalItems})</h3>
-          <button>Remove all</button>
+          <button onClick={handleRemoveAll}>Remove all</button>
         </div>
 
         {itemsInCart.map((item) => (
@@ -88,7 +73,6 @@ const CartModal = ({ setModal }) => {
                   e.preventDefault();
                   const sign = e.target.textContent;
                   handleQuantity(sign, item.quantity, item.name);
-                  console.log("minus");
                 }}
               >
                 -
@@ -99,7 +83,6 @@ const CartModal = ({ setModal }) => {
                   e.preventDefault();
                   const sign = e.target.textContent;
                   handleQuantity(sign, item.quantity, item.name);
-                  console.log("plus");
                 }}
               >
                 +
@@ -115,7 +98,8 @@ const CartModal = ({ setModal }) => {
 
         <button className="checkout-btn">Checkout</button>
       </div>
-    </StyledModal>
+    </StyledModal>,
+    document.getElementById("portal")
   );
 };
 
@@ -132,7 +116,7 @@ const StyledModal = styled.aside`
   .modal-container {
     position: fixed;
     right: 10%;
-    top: 50px;
+    top: 150px;
     width: 400px;
     background-color: #ffffff;
     padding: 30px;
@@ -152,6 +136,9 @@ const StyledModal = styled.aside`
       }
 
       button {
+        background: none;
+        border: none;
+        cursor: pointer;
         color: #888888;
         opacity: 0.7;
         font-size: 16px;
@@ -204,6 +191,11 @@ const StyledModal = styled.aside`
         justify-content: space-between;
         background-color: #f1f1f1;
         width: 100px;
+
+        button {
+          border: none;
+          cursor: pointer;
+        }
 
         button,
         p {

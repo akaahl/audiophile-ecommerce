@@ -8,17 +8,18 @@ const Item = ({ image, slug, name, description, price }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const [addToCart, setAddToCart] = useState(false);
-  const allData = JSON.parse(localStorage.getItem("storage"));
-  const cart = allData.cart;
 
   const handleClick = (e) => {
     e.preventDefault();
     setAddToCart(true);
+    const allData = JSON.parse(localStorage.getItem("storage"));
+    const cart = allData.cart;
     const updatedCart = cart.map((item) =>
       item.name === name
         ? { ...item, quantity: (item.quantity += quantity) }
         : { ...item }
     );
+    console.log(allData);
 
     const totalItem = updatedCart.reduce(
       (acc, val) => (acc += val.quantity),
