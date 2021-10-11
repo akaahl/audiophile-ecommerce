@@ -3,9 +3,11 @@ import ReactDom from "react-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import { useHistory } from "react-router-dom";
 import { updateData } from "../../actions/dataActions";
 
 const CartModal = ({ setModal }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const totalItems = useSelector((state) => state.allData.total);
   const itemsInCart = useSelector((state) => state.allData.cart).filter(
@@ -96,7 +98,12 @@ const CartModal = ({ setModal }) => {
           <p className="total-display">{`$${totalPrice.toLocaleString()}`}</p>
         </div>
 
-        <button className="checkout-btn">Checkout</button>
+        <button
+          className="checkout-btn"
+          onClick={() => history.push("/checkout")}
+        >
+          Checkout
+        </button>
       </div>
     </StyledModal>,
     document.getElementById("portal")
