@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import { updateData } from "../../actions/dataActions";
 
 const CartModal = ({ setModal }) => {
+  const dispatch = useDispatch();
   const totalItems = useSelector((state) => state.allData.total);
   const itemsInCart = useSelector((state) => state.allData.cart).filter(
     (item) => item.quantity > 0
@@ -12,16 +14,59 @@ const CartModal = ({ setModal }) => {
     (acc, item) => (acc += item.quantity * item.price),
     0
   );
-  console.log(itemsInCart);
 
   const handleModal = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setModal(false);
   };
+
+  const handleQuantity = (sign, quantity, name) => {
+    if (sign === "+") {
+      const updatedQuantity = (quantity += 1);
+      const allData = JSON.parse(localStorage.getItem("storage"));
+      const updatedCart = allData.cart.map((item) =>
+        item.name === name
+          ? { ...item, quantity: updatedQuantity }
+          : { ...item }
+      );
+      const totalItem = updatedCart.reduce(
+        (acc, val) => (acc += val.quantity),
+        0
+      );
+      const updatedAllData = {
+        ...allData,
+        cart: updatedCart,
+        total: totalItem,
+      };
+      localStorage.setItem("storage", JSON.stringify(updatedAllData));
+      dispatch(updateData(updatedAllData));
+    }
+
+    if (sign === "-") {
+      const updatedQuantity = (quantity -= 1);
+      const allData = JSON.parse(localStorage.getItem("storage"));
+      const updatedCart = allData.cart.map((item) =>
+        item.name === name
+          ? { ...item, quantity: updatedQuantity }
+          : { ...item }
+      );
+      const totalItem = updatedCart.reduce(
+        (acc, val) => (acc += val.quantity),
+        0
+      );
+      const updatedAllData = {
+        ...allData,
+        cart: updatedCart,
+        total: totalItem,
+      };
+      localStorage.setItem("storage", JSON.stringify(updatedAllData));
+      dispatch(updateData(updatedAllData));
+    }
+  };
   return (
     <StyledModal onClick={handleModal}>
-      <div className="modal-container">
+      <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <div className="top">
           <h3>Cart ({totalItems})</h3>
           <button>Remove all</button>
@@ -38,9 +83,27 @@ const CartModal = ({ setModal }) => {
             </div>
 
             <div className="mid-right">
-              <button>-</button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  const sign = e.target.textContent;
+                  handleQuantity(sign, item.quantity, item.name);
+                  console.log("minus");
+                }}
+              >
+                -
+              </button>
               <p>{item.quantity}</p>
-              <button>+</button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  const sign = e.target.textContent;
+                  handleQuantity(sign, item.quantity, item.name);
+                  console.log("plus");
+                }}
+              >
+                +
+              </button>
             </div>
           </div>
         ))}

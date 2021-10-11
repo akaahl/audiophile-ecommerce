@@ -25,9 +25,9 @@ const Item = ({ image, slug, name, description, price }) => {
       0
     );
 
-    const newAllData = { ...allData, cart: updatedCart, total: totalItem };
-    localStorage.setItem("storage", JSON.stringify(newAllData));
-    dispatch(updateData(newAllData));
+    const updatedAllData = { ...allData, cart: updatedCart, total: totalItem };
+    localStorage.setItem("storage", JSON.stringify(updatedAllData));
+    dispatch(updateData(updatedAllData));
 
     setTimeout(() => {
       setAddToCart(false);
