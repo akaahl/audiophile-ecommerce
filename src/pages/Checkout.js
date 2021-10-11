@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "../components/Checkout/Header";
-import Form from "../components/Checkout/Form";
+import FormContainer from "../components/Checkout/FormContainer";
 
 const Checkout = () => {
   return (
     <div>
       <Header />
-      <Form />
+      <FormContainer />
     </div>
   );
 };
