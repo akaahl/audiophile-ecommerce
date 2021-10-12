@@ -61,7 +61,7 @@ const InnerForm = () => {
               </div>
 
               <input
-                type="number"
+                type="text"
                 id="number"
                 placeholder="+1 202-555-0136"
                 className="input-el"
@@ -139,7 +139,7 @@ const InnerForm = () => {
             <span>Payment Method</span>
 
             <div className="payment-methods">
-              <div className="payment-method">
+              <label htmlFor="e-money" className="payment-method">
                 <input
                   type="radio"
                   name="method"
@@ -148,14 +148,14 @@ const InnerForm = () => {
                   checked
                 />
                 <div className="checkmark"></div>
-                <label htmlFor="e-money">e-Money</label>
-              </div>
+                <span>e-Money</span>
+              </label>
 
-              <div className="payment-method">
+              <label htmlFor="cod" className="payment-method">
                 <input type="radio" name="method" id="cod" value="cod" />
                 <div className="checkmark"></div>
-                <label htmlFor="cod">Cash on Delivery</label>
-              </div>
+                <span>Cash on Delivery</span>
+              </label>
             </div>
           </div>
 
@@ -249,7 +249,9 @@ const InnerForm = () => {
             <span>{`$ ${grandTotal.toLocaleString()}`}</span>
           </div>
 
-          <button className="submit-pay">Continue &amp; Pay</button>
+          <button className="submit-pay" type="submit">
+            Continue &amp; Pay
+          </button>
         </div>
       </div>
     </StyledInnerForm>
@@ -333,6 +335,19 @@ const StyledInnerForm = styled.div`
             border-radius: 5px;
             padding: 15px;
             border: 1px solid rgba(0, 0, 0, 0.2);
+            color: #000000;
+            font-weight: 700;
+            transition: all 0.1s linear;
+            outline: none;
+
+            &::placeholder {
+              font-weight: 600;
+              opacity: 0.7;
+            }
+
+            &:focus {
+              border: 1px solid #d87d4a;
+            }
           }
         }
       }
@@ -402,6 +417,19 @@ const StyledInnerForm = styled.div`
             border-radius: 5px;
             padding: 15px;
             border: 1px solid rgba(0, 0, 0, 0.2);
+            outline: none;
+            transition: all 0.2s linear;
+            color: #000000;
+            font-weight: 700;
+
+            &::placeholder {
+              font-weight: 600;
+              opacity: 0.7;
+            }
+
+            &:focus {
+              border: 1px solid #d87d4a;
+            }
           }
         }
       }
@@ -441,6 +469,7 @@ const StyledInnerForm = styled.div`
             position: relative;
             display: flex;
             align-items: center;
+            cursor: pointer;
 
             &:nth-child(2) {
               margin-top: 15px;
@@ -464,7 +493,7 @@ const StyledInnerForm = styled.div`
                 width: 0px;
                 border-radius: 50%;
                 background-color: #d87d4a;
-                transition: all 0.4s ease-in-out;
+                transition: all 0.3s ease-in-out;
               }
             }
 
@@ -477,7 +506,7 @@ const StyledInnerForm = styled.div`
               }
             }
 
-            label {
+            span {
               margin-left: 15px;
               font-weight: 700;
               font-size: 14px;
@@ -523,6 +552,19 @@ const StyledInnerForm = styled.div`
               border-radius: 5px;
               padding: 15px;
               border: 1px solid rgba(0, 0, 0, 0.2);
+              outline: none;
+              transition: all 0.2s linear;
+              color: #000000;
+              font-weight: 700;
+
+              &::placeholder {
+                font-weight: 600;
+                opacity: 0.7;
+              }
+
+              &:focus {
+                border: 1px solid #d87d4a;
+              }
             }
           }
 
@@ -635,7 +677,7 @@ const StyledInnerForm = styled.div`
       }
 
       .grand-total {
-        margin-top: 20px;
+        margin-top: 30px;
 
         span {
           font-size: 18px;
@@ -653,6 +695,12 @@ const StyledInnerForm = styled.div`
         color: #ffffff;
         text-transform: uppercase;
         font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          background-color: #fbaf85;
+        }
       }
     }
   }

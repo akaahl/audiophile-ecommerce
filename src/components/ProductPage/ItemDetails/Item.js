@@ -151,19 +151,23 @@ const StyledSection = styled.section`
 
       .quantity {
         background-color: #f1f1f1;
-        padding: 15px 25px;
+        /* padding: 15px 25px; */
         height: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
 
         p {
-          margin: 0 20px;
-          width: 30px;
+          padding: 15px;
+          margin: 0;
+          font-weight: 700;
           text-align: center;
+          flex: 0.3;
         }
 
         button {
+          flex: 0.3;
+          padding: 15px 18px;
+
           border: none;
           background: none;
           font-size: 18px;
@@ -172,6 +176,7 @@ const StyledSection = styled.section`
           transition: all 0.2s ease-in-out;
 
           &:hover {
+            background-color: #d3d3d3;
             color: #d87d4a;
           }
         }
