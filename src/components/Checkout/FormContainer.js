@@ -21,7 +21,7 @@ export default FormContainer;
 
 const StyledForm = styled.form`
   background-color: #f2f2f2;
-  padding: 50px 150px;
+  padding: 50px 100px;
 
   .go-back-btn {
     background: none;
@@ -36,6 +36,21 @@ const StyledForm = styled.form`
 
     &:hover {
       color: #d87d4a;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    padding: 20px;
+
+    .go-back-btn {
+      margin-top: 0;
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .go-back-btn {
+      /* font-size: 14px; */
     }
   }
 `;

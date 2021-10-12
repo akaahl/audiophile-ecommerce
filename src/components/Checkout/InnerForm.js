@@ -230,23 +230,23 @@ const InnerForm = () => {
 
         <div className="total-details">
           <div className="total">
-            <p>Total</p>
-            <span>{`$ ${total.toLocaleString()}`}</span>
+            <p className="total-text">Total</p>
+            <span className="total-span">{`$ ${total.toLocaleString()}`}</span>
           </div>
 
           <div className="shipping">
-            <p>Shipping</p>
-            <span>{`$ ${shipping}`}</span>
+            <p className="total-text">Shipping</p>
+            <span className="total-span">{`$ ${shipping}`}</span>
           </div>
 
           <div className="tax">
-            <p>VAT (Included)</p>
-            <span>{`$ ${tax}`}</span>
+            <p className="total-text">VAT (Included)</p>
+            <span className="total-span">{`$ ${tax}`}</span>
           </div>
 
           <div className="grand-total">
-            <p>Grand Total</p>
-            <span>{`$ ${grandTotal.toLocaleString()}`}</span>
+            <p className="total-text">Grand Total</p>
+            <span className="total-span">{`$ ${grandTotal.toLocaleString()}`}</span>
           </div>
 
           <button className="submit-pay" type="submit">
@@ -700,8 +700,84 @@ const StyledInnerForm = styled.div`
 
         &:hover {
           background-color: #fbaf85;
+          color: #000000;
         }
       }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+
+    .left-side {
+      width: 100%;
+    }
+
+    .right-side {
+      margin-left: 0;
+      margin-top: 40px;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 425px) {
+    margin-top: 20px;
+
+    label,
+    span,
+    p {
+      font-size: 12px !important;
+    }
+
+    h2 {
+      font-size: 25px !important;
+    }
+
+    h4 {
+      font-size: 14px !important;
+    }
+
+    .total-text,
+    .total-span {
+      font-size: 14px !important;
+    }
+
+    .left-side {
+      padding: 20px;
+
+      .billing {
+        .billing-details {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      .shipping {
+        .shipping-info {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      .payment {
+        .top {
+          display: flex;
+          flex-direction: column;
+
+          .payment-methods {
+            margin-left: 0;
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+
+    .right-side {
+      padding: 20px;
+    }
+
+    .submit-pay {
+      padding: 10px 20px !important;
     }
   }
 `;
