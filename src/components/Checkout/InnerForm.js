@@ -5,7 +5,17 @@ import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
 const InnerForm = () => {
-  const cart = useSelector((state) => state.allData.cart);
+  const cart = useSelector((state) => state.allData.cart).filter(
+    (item) => item.quantity > 0
+  );
+  const total = cart.reduce(
+    (total, amount) => (total += amount.price * amount.quantity),
+    0
+  );
+  const shipping = 50;
+  const tax = (0.2 * total).toFixed(1);
+  const grandTotal = total + shipping + +tax;
+  console.log(total, shipping, tax, grandTotal);
 
   return (
     <StyledInnerForm>
@@ -208,15 +218,39 @@ const InnerForm = () => {
                   />
 
                   <div className="item-details">
-                    <p>{item.displayName}</p>
-                    <span>{item.price.toLocaleString()}</span>
+                    <p className="display-name">{item.displayName}</p>
+                    <span className="price">{`$${item.price.toLocaleString()}`}</span>
                   </div>
                 </div>
 
-                <span>{item.quantity}</span>
+                <span className="quantity">{`x${item.quantity}`}</span>
               </li>
             ))}
         </ul>
+
+        <div className="total-details">
+          <div className="total">
+            <p>Total</p>
+            <span>{`$ ${total.toLocaleString()}`}</span>
+          </div>
+
+          <div className="shipping">
+            <p>Shipping</p>
+            <span>{`$ ${shipping}`}</span>
+          </div>
+
+          <div className="tax">
+            <p>VAT (Included)</p>
+            <span>{`$ ${tax}`}</span>
+          </div>
+
+          <div className="grand-total">
+            <p>Grand Total</p>
+            <span>{`$ ${grandTotal.toLocaleString()}`}</span>
+          </div>
+
+          <button className="submit-pay">Continue &amp; Pay</button>
+        </div>
       </div>
     </StyledInnerForm>
   );
@@ -227,6 +261,7 @@ export default InnerForm;
 const StyledInnerForm = styled.div`
   margin-top: 40px;
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
 
   .left-side {
@@ -537,11 +572,87 @@ const StyledInnerForm = styled.div`
           padding: 0;
 
           img {
-            height: 80px;
-            width: 80px;
+            height: 60px;
+            width: 60px;
             object-fit: cover;
+            border-radius: 8px;
+          }
+
+          .item-details {
+            margin-left: 20px;
+            .display-name {
+              font-weight: 700;
+              font-size: 14px;
+            }
+
+            .price {
+              margin-top: 3px;
+              font-weight: 500;
+              font-size: 14px;
+              color: #888888;
+              opacity: 0.9;
+            }
           }
         }
+
+        .quantity {
+          font-weight: 600;
+          font-size: 14px;
+          color: #888888;
+          opacity: 0.9;
+        }
+      }
+    }
+
+    .total-details {
+      margin-top: 40px;
+
+      .total,
+      .shipping,
+      .tax,
+      .grand-total {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        p {
+          font-weight: 200;
+          font-size: 16px;
+          color: #191919;
+          text-transform: uppercase;
+        }
+      }
+
+      .total,
+      .shipping,
+      .tax {
+        margin-top: 5px;
+        span {
+          font-size: 18px;
+          color: #191919;
+          font-weight: 700;
+        }
+      }
+
+      .grand-total {
+        margin-top: 20px;
+
+        span {
+          font-size: 18px;
+          color: #d87d4a;
+          font-weight: 700;
+        }
+      }
+
+      .submit-pay {
+        margin-top: 30px;
+        background-color: #d87d4a;
+        border: none;
+        padding: 15px 25px;
+        width: 100%;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-weight: 700;
       }
     }
   }
