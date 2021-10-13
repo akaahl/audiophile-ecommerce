@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import InnerForm from "./InnerForm";
+import Footer from "../Shared/Footer";
 
 const FormContainer = () => {
   const history = useHistory();
@@ -11,8 +12,8 @@ const FormContainer = () => {
       <button onClick={() => history.goBack()} className="go-back-btn">
         Go Back
       </button>
-
       <InnerForm />
+      <Footer />
     </StyledForm>
   );
 };

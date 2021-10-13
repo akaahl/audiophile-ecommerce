@@ -1,13 +1,14 @@
 import React from "react";
-import codIcon from "../../assets/shared/desktop/icon-cash-on-delivery.svg";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
-import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { initialValues, validationSchema, handleSubmit } from "./utils";
 import "yup-phone";
 import { StyledInnerForm } from "./styles.js";
 import TextError from "./TextError";
 import RadioGroups from "./RadioGroups";
+import EmoneyDetails from "./EmoneyDetails";
+import CodDetails from "./CodDetails";
 
 const InnerForm = () => {
   const cart = useSelector((state) => state.allData.cart).filter(
@@ -20,57 +21,11 @@ const InnerForm = () => {
   const shipping = 50;
   const tax = (0.2 * total).toFixed(1);
   const grandTotal = total + shipping + +tax;
-  const phoneRegExp =
-    /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-  const validationSchema = Yup.object({
-    name: Yup.string().required("Field cannot be empty"),
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Field cannot be empty"),
-    number: Yup.string()
-      .matches(phoneRegExp, "Invalid phone number")
-      .required("Field cannot be empty"),
-    address: Yup.string().required("Field cannot be empty"),
-    zipcode: Yup.string().required("Field cannot be empty"),
-    city: Yup.string().required("Field cannot be empty"),
-    country: Yup.string().required("Field cannot be empty"),
-    method: Yup.string().required("Pick one of the payment option"),
-    eNumber: Yup.string().when("method", {
-      is: "e-money",
-      then: Yup.string().required("Field cannot be empty"),
-    }),
-    ePin: Yup.string().when("method", {
-      is: "e-money",
-      then: Yup.string().required("Field cannot be empty"),
-    }),
-  });
-
-  const initialValues = {
-    name: "",
-    email: "",
-    number: "",
-    address: "",
-    zipcode: "",
-    city: "",
-    country: "",
-    method: "e-money",
-    eNumber: "",
-    ePin: "",
-  };
 
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => {
-        if (values.method === "cod") {
-          values.eNumber = "";
-          values.ePin = "";
-          console.log(values);
-        }
-
-        console.log("Form validated");
-      }}
+      onSubmit={handleSubmit}
       validationSchema={validationSchema}
       validateOnChange={false}
     >
@@ -209,50 +164,9 @@ const InnerForm = () => {
                 </div>
 
                 <div className="bottom">
-                  {formik.values.method === "e-money" && (
-                    <div className="e-money-details">
-                      <div className="e-money-number">
-                        <div className="top">
-                          <label htmlFor="eNumber">e-Money Number</label>
-                          <ErrorMessage name="eNumber" component={TextError} />
-                        </div>
+                  {formik.values.method === "e-money" && <EmoneyDetails />}
 
-                        <Field
-                          type="text"
-                          name="eNumber"
-                          id="eNumber"
-                          placeholder="238521993"
-                          className="input-el"
-                        />
-                      </div>
-
-                      <div className="e-money-pin">
-                        <div className="top">
-                          <label htmlFor="ePin">e-Money PIN</label>
-                          <ErrorMessage name="ePin" component={TextError} />
-                        </div>
-                        <Field
-                          type="text"
-                          name="ePin"
-                          id="pin"
-                          placeholder="6891"
-                          className="input-el"
-                        />
-                      </div>
-                    </div>
-                  )}
-
-                  {formik.values.method === "cod" && (
-                    <div className="cod-details">
-                      <img src={codIcon} alt="cash on delivery" />
-                      <p>
-                        The ‘Cash on Delivery’ option enables you to pay in cash
-                        when our delivery courier arrives at your residence.
-                        Just make sure your address is correct so that your
-                        order will not be cancelled.
-                      </p>
-                    </div>
-                  )}
+                  {formik.values.method === "cod" && <CodDetails />}
                 </div>
               </div>
             </div>
