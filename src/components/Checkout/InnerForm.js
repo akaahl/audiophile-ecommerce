@@ -2,11 +2,12 @@ import React from "react";
 import codIcon from "../../assets/shared/desktop/icon-cash-on-delivery.svg";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { useFormik, Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 import "yup-phone";
 import { StyledInnerForm } from "./styles.js";
 import TextError from "./TextError";
+import RadioGroups from "./RadioGroups";
 
 const InnerForm = () => {
   const cart = useSelector((state) => state.allData.cart).filter(
@@ -35,6 +36,14 @@ const InnerForm = () => {
     city: Yup.string().required("Field cannot be empty"),
     country: Yup.string().required("Field cannot be empty"),
     method: Yup.string().required("Pick one of the payment option"),
+    eNumber: Yup.string().when("method", {
+      is: "e-money",
+      then: Yup.string().required("Field cannot be empty"),
+    }),
+    ePin: Yup.string().when("method", {
+      is: "e-money",
+      then: Yup.string().required("Field cannot be empty"),
+    }),
   });
 
   const initialValues = {
@@ -45,27 +54,23 @@ const InnerForm = () => {
     zipcode: "",
     city: "",
     country: "",
-    method: "",
+    method: "e-money",
+    eNumber: "",
+    ePin: "",
   };
-
-  const onSubmit = (values, submitProps) => {
-    console.log(submitProps);
-  };
-
-  // const formik = useFormik({
-
-  //   onSubmit: (values) => {
-  //     console.log(values);
-  //   },
-  //   validationSchema,
-  // });
-
-  // console.log(formik.errors);
 
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => {
+        if (values.method === "cod") {
+          values.eNumber = "";
+          values.ePin = "";
+          console.log(values);
+        }
+
+        console.log("Form validated");
+      }}
       validationSchema={validationSchema}
       validateOnChange={false}
     >
@@ -200,68 +205,54 @@ const InnerForm = () => {
                 <div className="top">
                   <span>Payment Method</span>
 
-                  <div className="payment-methods">
-                    <label htmlFor="e-money" className="payment-method">
-                      <Field
-                        type="radio"
-                        name="method"
-                        id="e-money"
-                        value="e-money"
-                        checked
-                      />
-                      <div className="checkmark"></div>
-                      <span>e-Money</span>
-                    </label>
-
-                    <label htmlFor="cod" className="payment-method">
-                      <Field type="radio" name="method" id="cod" value="cod" />
-                      <div className="checkmark"></div>
-                      <span>Cash on Delivery</span>
-                    </label>
-                  </div>
+                  <Field name="method" render={RadioGroups} />
                 </div>
 
                 <div className="bottom">
-                  {/* <div className="e-money-details">
-              <div className="e-money-number">
-                <div className="top">
-                  <label htmlFor="number">e-Money Number</label>
-                  <small>Field cannot be empty</small>
-                </div>
+                  {formik.values.method === "e-money" && (
+                    <div className="e-money-details">
+                      <div className="e-money-number">
+                        <div className="top">
+                          <label htmlFor="eNumber">e-Money Number</label>
+                          <ErrorMessage name="eNumber" component={TextError} />
+                        </div>
 
-                <input
-                  type="text"
-                  name="number"
-                  id="number"
-                  placeholder="238521993"
-                  className="input-el"
-                />
-              </div>
+                        <Field
+                          type="text"
+                          name="eNumber"
+                          id="eNumber"
+                          placeholder="238521993"
+                          className="input-el"
+                        />
+                      </div>
 
-              <div className="e-money-pin">
-                <div className="top">
-                  <label htmlFor="pin">e-Money PIN</label>
-                  <small>Field cannot be empty</small>
-                </div>
-                <input
-                  type="text"
-                  name="pin"
-                  id="pin"
-                  placeholder="6891"
-                  className="input-el"
-                />
-              </div>
-            </div> */}
+                      <div className="e-money-pin">
+                        <div className="top">
+                          <label htmlFor="ePin">e-Money PIN</label>
+                          <ErrorMessage name="ePin" component={TextError} />
+                        </div>
+                        <Field
+                          type="text"
+                          name="ePin"
+                          id="pin"
+                          placeholder="6891"
+                          className="input-el"
+                        />
+                      </div>
+                    </div>
+                  )}
 
-                  {/* <div className="cod-details">
-              <img src={codIcon} alt="cash on delivery" />
-              <p>
-                The ‘Cash on Delivery’ option enables you to pay in cash when
-                our delivery courier arrives at your residence. Just make sure
-                your address is correct so that your order will not be
-                cancelled.
-              </p>
-            </div> */}
+                  {formik.values.method === "cod" && (
+                    <div className="cod-details">
+                      <img src={codIcon} alt="cash on delivery" />
+                      <p>
+                        The ‘Cash on Delivery’ option enables you to pay in cash
+                        when our delivery courier arrives at your residence.
+                        Just make sure your address is correct so that your
+                        order will not be cancelled.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
