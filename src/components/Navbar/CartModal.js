@@ -22,6 +22,7 @@ const CartModal = ({ setModal }) => {
     e.preventDefault();
     e.stopPropagation();
     setModal(false);
+    document.body.style.overflow = "scroll";
   };
 
   const handleQuantity = (sign, quantity, name) => {
@@ -119,11 +120,12 @@ const StyledModal = styled.aside`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.4);
+  overflow-y: scroll;
+  z-index: 100;
+  padding: 50px;
 
   .modal-container {
-    position: fixed;
-    right: 10%;
-    top: 150px;
+    margin: 50px 50px 0 auto;
     width: 400px;
     background-color: #ffffff;
     padding: 30px;
@@ -271,12 +273,10 @@ const StyledModal = styled.aside`
   }
 
   @media (max-width: 425px) {
+    padding: 50px 0;
     .modal-container {
-      position: relative;
-      top: 0;
-      right: 0;
       width: 90%;
-      margin: 50px auto 0 auto;
+      margin: 50px auto;
       padding: 25px 15px;
     }
   }

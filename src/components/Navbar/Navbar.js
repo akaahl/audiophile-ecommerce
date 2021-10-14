@@ -34,7 +34,12 @@ const Navbar = () => {
           </li>
         </ul>
 
-        <button onClick={() => setModal(true)}>
+        <button
+          onClick={() => {
+            setModal(true);
+            document.body.style.overflow = "hidden";
+          }}
+        >
           <img src={cartIcon} alt="cart" />
           {totalItem && <span>{totalItem}</span>}
         </button>
