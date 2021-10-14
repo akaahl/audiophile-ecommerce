@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDom from "react-dom";
 import styled from "styled-components";
 import checkMark from "../../assets/shared/desktop/check-mark-2.svg";
 import { v4 as uuidv4 } from "uuid";
 
 const OrderConfirmation = ({ cart, grandTotal }) => {
+  const [viewMore, setViewMore] = useState(false);
+
   return ReactDom.createPortal(
-    <StyledContainer>
+    <StyledContainer viewMoreItem={viewMore}>
       <div className="modal">
         <img src={checkMark} alt="check mark" className="check-mark" />
 
@@ -37,6 +39,17 @@ const OrderConfirmation = ({ cart, grandTotal }) => {
                   </li>
                 ))}
             </ul>
+
+            <button
+              className="view-more-btn"
+              onClick={() => setViewMore(true)}
+            >{`and ${cart.length} other item(s)`}</button>
+            <button
+              className="view-less-btn"
+              onClick={() => setViewMore(false)}
+            >
+              View less
+            </button>
           </div>
 
           <div className="right-side">
@@ -107,7 +120,7 @@ const StyledContainer = styled.aside`
         background-color: #f1f1f1;
         height: 100%;
         display: flex;
-        align-items: center;
+        flex-direction: column;
         padding: 30px 30px 30px 20px;
 
         ul {
@@ -120,6 +133,8 @@ const StyledContainer = styled.aside`
 
             &:not(:first-child) {
               margin-top: 20px;
+              display: ${({ viewMoreItem }) =>
+                viewMoreItem ? "flex" : "none"};
             }
 
             .item-container {
@@ -159,6 +174,33 @@ const StyledContainer = styled.aside`
             }
           }
         }
+
+        .view-more-btn {
+          display: ${({ viewMoreItem }) => (viewMoreItem ? "none" : "block")};
+          border: none;
+          background: none;
+          padding: 10px 20px;
+          color: rgba(0, 0, 0, 0.4);
+          margin-top: 5px;
+          font-weight: 700;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .view-less-btn {
+          display: ${({ viewMoreItem }) => (viewMoreItem ? "block" : "none")};
+          border: none;
+          background: none;
+          padding: 12px 25px 15px 25px;
+          color: rgba(0, 0, 0, 0.4);
+          margin-top: 20px;
+          font-weight: 700;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+          cursor: pointer;
+        }
       }
 
       .right-side {
@@ -196,6 +238,13 @@ const StyledContainer = styled.aside`
       font-weight: 600;
       padding: 15px 25px;
       width: 100%;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #fbaf85;
+        color: #000000;
+      }
     }
   }
 `;
