@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { initialValues, validationSchema } from "./utils";
-import "yup-phone";
 import { StyledInnerForm } from "./styles.js";
 import TextError from "./TextError";
 import RadioGroups from "./RadioGroups";
@@ -29,12 +28,10 @@ const InnerForm = () => {
     if (values.method === "cod") {
       values.eNumber = "";
       values.ePin = "";
-      console.log(values);
     }
 
     setModal(true);
-    document.getElementById("root").overflowY = "hidden";
-    console.log("Form validated");
+    document.body.style.overflowY = "hidden";
   };
 
   return (
@@ -45,10 +42,8 @@ const InnerForm = () => {
       validateOnChange={false}
     >
       {(formik) => {
-        console.log(formik);
-
         return (
-          <StyledInnerForm as={Form} modal={modal}>
+          <StyledInnerForm as={Form}>
             <div className="left-side">
               <h2>Checkout</h2>
 

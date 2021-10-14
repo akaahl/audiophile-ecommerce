@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const StyledInnerForm = styled.form`
   margin-top: 40px;
+  margin-bottom: 100px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;

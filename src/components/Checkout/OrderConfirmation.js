@@ -3,9 +3,11 @@ import ReactDom from "react-dom";
 import styled from "styled-components";
 import checkMark from "../../assets/shared/desktop/check-mark-2.svg";
 import { v4 as uuidv4 } from "uuid";
+import { useHistory } from "react-router-dom";
 
 const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
   const [viewMore, setViewMore] = useState(false);
+  const history = useHistory();
 
   return ReactDom.createPortal(
     <StyledContainer
@@ -14,7 +16,7 @@ const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
         e.stopPropagation();
         e.preventDefault();
         setModal(false);
-        document.getElementById("root").overflowY = "initial";
+        document.body.style.overflowY = "initial";
       }}
     >
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -68,7 +70,9 @@ const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
           </div>
         </div>
 
-        <button className="back-to-home-btn">Back To Home</button>
+        <button className="back-to-home-btn" onClick={() => history.push("/")}>
+          Back To Home
+        </button>
       </div>
     </StyledContainer>,
     document.getElementById("portal")
@@ -84,19 +88,18 @@ const StyledContainer = styled.aside`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  overflow-y: scroll;
+  padding: 50px 0 !important;
 
   .modal {
-    width: 40%;
+    width: 45%;
     padding: 40px;
     border-radius: 8px;
     background-color: #ffffff;
 
     .check-mark {
-      /* fill: #d87d4a;
-      background-color: #d87d4a; */
       height: 60px;
       width: 60px;
       object-fit: cover;
@@ -118,9 +121,7 @@ const StyledContainer = styled.aside`
     .items-container {
       margin-top: 20px;
       display: flex;
-      /* align-items: center; */
       border-radius: 8px;
-      /* height: auto; */
       overflow: hidden;
 
       .left-side {
@@ -213,7 +214,6 @@ const StyledContainer = styled.aside`
 
       .right-side {
         flex: 0.5;
-        /* height: 100%; */
         background-color: #191919;
         display: grid;
         place-items: center;
@@ -252,6 +252,51 @@ const StyledContainer = styled.aside`
       &:hover {
         background-color: #fbaf85;
         color: #000000;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .modal {
+      width: 80%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .modal {
+      .items-container {
+        flex-direction: column;
+
+        .right-side {
+          padding: 40px 0;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 425px) {
+    .modal {
+      width: 90%;
+      padding: 20px;
+
+      .items-container {
+        .left-side {
+          padding: 20px 20px 20px 5px;
+
+          .view-more-btn,
+          .view-less-btn {
+            margin-left: 15px;
+          }
+        }
+
+        .right-side {
+          padding: 20px 0;
+
+          .total-container {
+            display: grid;
+            place-items: center;
+          }
+        }
       }
     }
   }

@@ -8,7 +8,7 @@ const Checkout = () => {
     <div>
       <Header />
       <FormContainer />
-      <Footer />
+      <Footer params="checkout" />
     </div>
   );
 };
