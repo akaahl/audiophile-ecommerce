@@ -4,12 +4,20 @@ import styled from "styled-components";
 import checkMark from "../../assets/shared/desktop/check-mark-2.svg";
 import { v4 as uuidv4 } from "uuid";
 
-const OrderConfirmation = ({ cart, grandTotal }) => {
+const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
   const [viewMore, setViewMore] = useState(false);
 
   return ReactDom.createPortal(
-    <StyledContainer viewMoreItem={viewMore}>
-      <div className="modal">
+    <StyledContainer
+      viewMoreItem={viewMore}
+      onClick={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setModal(false);
+        document.getElementById("root").overflowY = "initial";
+      }}
+    >
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
         <img src={checkMark} alt="check mark" className="check-mark" />
 
         <h2 className="order-message">Thank you for your order</h2>

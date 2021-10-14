@@ -38,13 +38,3 @@ export const initialValues = {
   eNumber: "",
   ePin: "",
 };
-
-export const handleSubmit = (values) => {
-  if (values.method === "cod") {
-    values.eNumber = "";
-    values.ePin = "";
-    console.log(values);
-  }
-
-  console.log("Form validated");
-};

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { initialValues, validationSchema, handleSubmit } from "./utils";
+import { initialValues, validationSchema } from "./utils";
 import "yup-phone";
 import { StyledInnerForm } from "./styles.js";
 import TextError from "./TextError";
@@ -12,6 +12,7 @@ import CodDetails from "./CodDetails";
 import OrderConfirmation from "./OrderConfirmation";
 
 const InnerForm = () => {
+  const [modal, setModal] = useState(false);
   const cart = useSelector((state) => state.allData.cart).filter(
     (item) => item.quantity > 0
   );
@@ -24,6 +25,18 @@ const InnerForm = () => {
   const tax = (0.2 * total).toFixed(1);
   const grandTotal = total + shipping + +tax;
 
+  const handleSubmit = (values) => {
+    if (values.method === "cod") {
+      values.eNumber = "";
+      values.ePin = "";
+      console.log(values);
+    }
+
+    setModal(true);
+    document.getElementById("root").overflowY = "hidden";
+    console.log("Form validated");
+  };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -35,7 +48,7 @@ const InnerForm = () => {
         console.log(formik);
 
         return (
-          <StyledInnerForm as={Form}>
+          <StyledInnerForm as={Form} modal={modal}>
             <div className="left-side">
               <h2>Checkout</h2>
 
@@ -230,7 +243,13 @@ const InnerForm = () => {
               </div>
             </div>
 
-            <OrderConfirmation cart={cart} grandTotal={grandTotal} />
+            {modal && (
+              <OrderConfirmation
+                cart={cart}
+                grandTotal={grandTotal}
+                setModal={setModal}
+              />
+            )}
           </StyledInnerForm>
         );
       }}
