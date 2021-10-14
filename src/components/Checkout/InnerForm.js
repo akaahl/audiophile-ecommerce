@@ -9,11 +9,13 @@ import TextError from "./TextError";
 import RadioGroups from "./RadioGroups";
 import EmoneyDetails from "./EmoneyDetails";
 import CodDetails from "./CodDetails";
+import OrderConfirmation from "./OrderConfirmation";
 
 const InnerForm = () => {
   const cart = useSelector((state) => state.allData.cart).filter(
     (item) => item.quantity > 0
   );
+
   const total = cart.reduce(
     (total, amount) => (total += amount.price * amount.quantity),
     0
@@ -160,7 +162,9 @@ const InnerForm = () => {
                 <div className="top">
                   <span>Payment Method</span>
 
-                  <Field name="method" render={RadioGroups} />
+                  <Field name="method">
+                    {({ field }) => <RadioGroups field={field} />}
+                  </Field>
                 </div>
 
                 <div className="bottom">
@@ -216,11 +220,17 @@ const InnerForm = () => {
                   <span className="total-span">{`$ ${grandTotal.toLocaleString()}`}</span>
                 </div>
 
-                <button className="submit-pay" type="submit">
+                <button
+                  className="submit-pay"
+                  type="submit"
+                  disabled={cart.length < 1}
+                >
                   Continue &amp; Pay
                 </button>
               </div>
             </div>
+
+            <OrderConfirmation cart={cart} grandTotal={grandTotal} />
           </StyledInnerForm>
         );
       }}

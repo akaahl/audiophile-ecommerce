@@ -436,6 +436,16 @@ export const StyledInnerForm = styled.form`
         cursor: pointer;
         transition: all 0.2s ease-in-out;
 
+        &:disabled {
+          opacity: 0.3;
+          cursor: not-allowed;
+
+          &:hover {
+            background-color: #d87d4a;
+            color: #ffffff;
+          }
+        }
+
         &:hover {
           background-color: #fbaf85;
           color: #000000;
