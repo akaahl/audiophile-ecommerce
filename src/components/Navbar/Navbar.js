@@ -4,18 +4,44 @@ import logo from "../../assets/shared/desktop/logo.svg";
 import cartIcon from "../../assets/shared/desktop/icon-cart.svg";
 import { Link } from "react-router-dom";
 import hamburgerIcon from "../../assets/shared/tablet/icon-hamburger.svg";
+import closeIcon from "../../assets/shared/tablet/icon-close.svg";
 import { useSelector } from "react-redux";
 import CartModal from "./CartModal";
+import Mobile from "./Mobile";
 
 const Navbar = () => {
   const totalItem = useSelector((state) => state.allData).total;
   const [modal, setModal] = useState(false);
+  const [mobile, setMobile] = useState(false);
+
+  const handleMobileNav = (e) => {
+    const nav = e.target.classList[1];
+
+    if (nav === "open") {
+      setMobile(true);
+      document.body.style.overflowY = "hidden";
+    } else {
+      setMobile(false);
+      document.body.style.overflowY = "scroll";
+    }
+  };
 
   return (
-    <NavContainer totalItem={totalItem}>
+    <NavContainer totalItem={totalItem} mobile={mobile}>
       <div className="inner-container">
         <div className="left-side">
-          <img src={hamburgerIcon} alt="hamburger" className="mobile-nav" />
+          <img
+            src={hamburgerIcon}
+            alt="hamburger"
+            className="mobile-nav open"
+            onClick={handleMobileNav}
+          />
+          <img
+            src={closeIcon}
+            alt="close"
+            className="mobile-nav close"
+            onClick={handleMobileNav}
+          />
           <img src={logo} alt="audiophile logo" className="logo" />
         </div>
 
@@ -46,6 +72,7 @@ const Navbar = () => {
 
         {modal && <CartModal setModal={setModal} />}
       </div>
+      {mobile && <Mobile setMobile={setMobile} />}
     </NavContainer>
   );
 };
@@ -54,6 +81,7 @@ export default Navbar;
 
 const NavContainer = styled.nav`
   width: 100%;
+  position: relative;
 
   .inner-container {
     display: flex;
@@ -124,7 +152,13 @@ const NavContainer = styled.nav`
     .inner-container {
       .left-side {
         .mobile-nav {
-          display: block;
+          &.open {
+            display: ${({ mobile }) => (mobile ? "none" : "block")};
+          }
+
+          &.close {
+            display: ${({ mobile }) => (mobile ? "block" : "none")};
+          }
         }
       }
       ul {
