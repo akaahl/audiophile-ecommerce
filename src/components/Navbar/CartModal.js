@@ -101,7 +101,11 @@ const CartModal = ({ setModal }) => {
 
         <button
           className="checkout-btn"
-          onClick={() => history.push("/checkout")}
+          onClick={() => {
+            history.push("/checkout");
+            document.body.style.overflow = "scroll";
+            setModal(false);
+          }}
         >
           Checkout
         </button>

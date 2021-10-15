@@ -70,7 +70,14 @@ const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
           </div>
         </div>
 
-        <button className="back-to-home-btn" onClick={() => history.push("/")}>
+        <button
+          className="back-to-home-btn"
+          onClick={() => {
+            history.push("/");
+            setModal(false);
+            document.body.style.overflowY = "initial";
+          }}
+        >
           Back To Home
         </button>
       </div>
@@ -220,6 +227,8 @@ const StyledContainer = styled.aside`
         padding: 10px;
 
         .total-container {
+          margin: ${({ viewMoreItem }) =>
+            viewMoreItem ? "auto 0 70px 0" : "initial"};
           .total-text {
             color: #ffffff;
             opacity: 0.5;

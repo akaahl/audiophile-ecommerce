@@ -103,6 +103,7 @@ const NavContainer = styled.nav`
       display: grid;
       place-items: center;
       z-index: 10;
+      margin-right: ${({ totalItem }) => (totalItem ? "10px" : "initial")};
 
       span {
         top: -15px;

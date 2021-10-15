@@ -20,7 +20,7 @@ const StyledHeader = styled.header`
     padding: 0 50px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 425px) {
     padding: 0 20px;
   }
 `;
