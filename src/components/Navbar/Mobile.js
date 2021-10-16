@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import arrowRight from "../../assets/shared/desktop/icon-arrow-right.svg";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeIn, mobileNavVariants } from "../../animations";
 
 const Mobile = ({ setMobile }) => {
   const closeMobile = (e) => {
@@ -26,8 +28,17 @@ const Mobile = ({ setMobile }) => {
     },
   ];
   return (
-    <StyledMobile onClick={closeMobile}>
-      <nav onClick={(e) => e.stopPropagation()}>
+    <StyledMobile
+      onClick={closeMobile}
+      variants={fadeIn}
+      animate="animate"
+      initial="initial"
+      exit="exit"
+    >
+      <motion.nav
+        onClick={(e) => e.stopPropagation()}
+        variants={mobileNavVariants}
+      >
         <ul>
           {imgLinks &&
             imgLinks.map(({ link, category }) => (
@@ -53,14 +64,14 @@ const Mobile = ({ setMobile }) => {
               </li>
             ))}
         </ul>
-      </nav>
+      </motion.nav>
     </StyledMobile>
   );
 };
 
 export default Mobile;
 
-const StyledMobile = styled.aside`
+const StyledMobile = styled(motion.aside)`
   position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
   margin-top: 88px;

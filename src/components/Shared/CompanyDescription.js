@@ -36,8 +36,24 @@ const CompanyDescription = ({ params, itemDetails }) => {
           animate={controlOne}
           initial="initial"
         />
-        <motion.img src={tabletModelImg} alt="model" className="tablet-img" />
-        <motion.img src={mobileModelImg} alt="model" className="mobile-img" />
+        <motion.img
+          src={tabletModelImg}
+          alt="model"
+          className="tablet-img"
+          ref={imgTwo}
+          variants={scaleIn}
+          initial="initial"
+          animate={controlTwo}
+        />
+        <motion.img
+          src={mobileModelImg}
+          alt="model"
+          className="mobile-img"
+          ref={imgThree}
+          variants={scaleIn}
+          initial="initial"
+          animate={controlThree}
+        />
       </div>
     </StyledContainer>
   );

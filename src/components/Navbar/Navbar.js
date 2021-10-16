@@ -8,7 +8,7 @@ import closeIcon from "../../assets/shared/tablet/icon-close.svg";
 import { useSelector } from "react-redux";
 import CartModal from "./CartModal";
 import Mobile from "./Mobile";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { navVariants } from "../../animations";
 
 const Navbar = () => {
@@ -78,9 +78,13 @@ const Navbar = () => {
           {totalItem && <span>{totalItem}</span>}
         </button>
 
-        {modal && <CartModal setModal={setModal} />}
+        <AnimatePresence>
+          {modal && <CartModal setModal={setModal} />}
+        </AnimatePresence>
       </div>
-      {mobile && <Mobile setMobile={setMobile} />}
+      <AnimatePresence>
+        {mobile && <Mobile setMobile={setMobile} />}
+      </AnimatePresence>
     </NavContainer>
   );
 };

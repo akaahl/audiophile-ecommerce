@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { useHistory } from "react-router-dom";
 import { updateData } from "../../actions/dataActions";
+import { motion } from "framer-motion";
+import { fadeIn, scaleIn } from "../../animations";
 
 const CartModal = ({ setModal }) => {
   const history = useHistory();
@@ -52,9 +54,20 @@ const CartModal = ({ setModal }) => {
     localStorage.setItem("storage", JSON.stringify(updatedAllData));
     dispatch(updateData(updatedAllData));
   };
+
   return ReactDom.createPortal(
-    <StyledModal onClick={handleModal}>
-      <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+    <StyledModal
+      onClick={handleModal}
+      variants={fadeIn}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
+      <motion.div
+        className="modal-container"
+        onClick={(e) => e.stopPropagation()}
+        variants={scaleIn}
+      >
         <div className="top">
           <h3>Cart ({totalItems})</h3>
           <button onClick={handleRemoveAll}>Remove all</button>
@@ -109,7 +122,7 @@ const CartModal = ({ setModal }) => {
         >
           Checkout
         </button>
-      </div>
+      </motion.div>
     </StyledModal>,
     document.getElementById("portal")
   );
@@ -117,7 +130,7 @@ const CartModal = ({ setModal }) => {
 
 export default CartModal;
 
-const StyledModal = styled.aside`
+const StyledModal = styled(motion.aside)`
   position: fixed;
   top: 0;
   left: 0;

@@ -6,6 +6,7 @@ export const useScroll = () => {
   const [element, view] = useInView({ threshold: 0.5 });
   if (view) {
     controls.start("animate");
+    console.log(true);
   }
   return [element, controls];
 };
@@ -77,7 +78,15 @@ export const fadeIn = {
   animate: {
     opacity: 1,
     transition: {
-      duration: 0.7,
+      duration: 0.3,
+      when: "beforeChildren",
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      when: "afterChildren",
     },
   },
 };
@@ -88,8 +97,29 @@ export const scaleIn = {
   },
   animate: {
     scale: 1,
+  },
+  exit: {
+    scale: 0,
+  },
+};
+
+export const mobileNavVariants = {
+  initial: {
+    y: "-100%",
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
     transition: {
-      type: "spring",
+      duration: 0.3,
+    },
+  },
+  exit: {
+    y: "-100%",
+    opacity: 0,
+    transition: {
+      duration: 0.3,
     },
   },
 };
