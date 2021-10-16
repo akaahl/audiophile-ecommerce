@@ -9,6 +9,7 @@ import RadioGroups from "./RadioGroups";
 import EmoneyDetails from "./EmoneyDetails";
 import CodDetails from "./CodDetails";
 import OrderConfirmation from "./OrderConfirmation";
+import { ConnectedFocusError } from "focus-formik-error";
 
 const InnerForm = () => {
   const [modal, setModal] = useState(false);
@@ -44,6 +45,7 @@ const InnerForm = () => {
       {(formik) => {
         return (
           <StyledInnerForm as={Form}>
+            <ConnectedFocusError />
             <div className="left-side">
               <h2>Checkout</h2>
 
