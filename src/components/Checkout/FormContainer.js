@@ -46,10 +46,4 @@ const StyledForm = styled.main`
       font-size: 16px;
     }
   }
-
-  @media (max-width: 425px) {
-    .go-back-btn {
-      /* font-size: 14px; */
-    }
-  }
 `;

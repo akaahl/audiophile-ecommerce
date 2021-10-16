@@ -4,10 +4,22 @@ import styled from "styled-components";
 import checkMark from "../../assets/shared/desktop/check-mark-2.svg";
 import { v4 as uuidv4 } from "uuid";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateData } from "../../actions/dataActions";
 
 const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
   const [viewMore, setViewMore] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const resetCart = () => {
+    const allData = JSON.parse(localStorage.getItem("storage"));
+    const updatedCart = allData.cart.map((item) => ({ ...item, quantity: 0 }));
+    const updatedAllData = { ...allData, cart: updatedCart, total: 0 };
+
+    localStorage.setItem("storage", JSON.stringify(updatedAllData));
+    dispatch(updateData(updatedAllData));
+  };
 
   return ReactDom.createPortal(
     <StyledContainer
@@ -17,6 +29,7 @@ const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
         e.preventDefault();
         setModal(false);
         document.body.style.overflowY = "initial";
+        resetCart();
       }}
     >
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -73,6 +86,7 @@ const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
         <button
           className="back-to-home-btn"
           onClick={() => {
+            resetCart();
             history.push("/");
             setModal(false);
             document.body.style.overflowY = "initial";

@@ -19,7 +19,6 @@ const Item = ({ image, slug, name, description, price }) => {
         ? { ...item, quantity: (item.quantity += quantity) }
         : { ...item }
     );
-    console.log(allData);
 
     const totalItem = updatedCart.reduce(
       (acc, val) => (acc += val.quantity),
@@ -151,7 +150,6 @@ const StyledSection = styled.section`
 
       .quantity {
         background-color: #f1f1f1;
-        /* padding: 15px 25px; */
         height: 100%;
         display: flex;
         align-items: center;

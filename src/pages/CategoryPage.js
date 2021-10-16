@@ -16,6 +16,9 @@ const CategoryPage = () => {
     .reverse();
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
     const dataUrl = "data.json";
     const cartUrl = "cart.json";
     const allData = JSON.parse(localStorage.getItem("storage"));

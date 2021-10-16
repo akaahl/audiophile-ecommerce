@@ -18,13 +18,19 @@ const Footer = ({ params, checkout }) => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/headphones">Headphones</Link>
+            <Link to="/headphones" onClick={() => window.scrollTo({ top: 0 })}>
+              Headphones
+            </Link>
           </li>
           <li>
-            <Link to="/speakers">Speakers</Link>
+            <Link to="/speakers" onClick={() => window.scrollTo({ top: 0 })}>
+              Speakers
+            </Link>
           </li>
           <li>
-            <Link to="/earphones">Earphones</Link>
+            <Link to="/earphones" onClick={() => window.scrollTo({ top: 0 })}>
+              Earphones
+            </Link>
           </li>
         </ul>
       </nav>

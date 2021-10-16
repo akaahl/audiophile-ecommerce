@@ -97,6 +97,7 @@ const NavContainer = styled.nav`
       .mobile-nav {
         margin-right: 30px;
         display: none;
+        cursor: pointer;
       }
     }
 

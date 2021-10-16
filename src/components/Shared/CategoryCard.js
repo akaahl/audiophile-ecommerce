@@ -129,7 +129,6 @@ const StyledCard = styled.div`
       li {
         width: 100%;
         height: 230px;
-        /* margin: 70px 0; */
 
         &:not(:first-child) {
           margin-top: 130px;
