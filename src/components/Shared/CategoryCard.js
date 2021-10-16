@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import arrowRight from "../../assets/shared/desktop/icon-arrow-right.svg";
+
 const CategoryCard = ({ params, itemDetails }) => {
   const imgLinks = [
     {
@@ -21,7 +22,7 @@ const CategoryCard = ({ params, itemDetails }) => {
 
   return (
     <StyledCard params={params} itemDetails={itemDetails}>
-      <ul>
+      <ul initial="initial" animate="animate">
         {imgLinks &&
           imgLinks.map(({ link, category }) => (
             <li key={uuidv4()}>

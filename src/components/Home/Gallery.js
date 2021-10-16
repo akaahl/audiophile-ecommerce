@@ -7,13 +7,25 @@ import tabletSpeakerImg from "../../assets/home/tablet/image-speaker-zx7.jpg";
 import mobileSpeakerImg from "../../assets/home/mobile/image-speaker-zx7.jpg";
 import earphoneImg from "../../assets/home/desktop/image-earphones-yx1.jpg";
 import { useHistory } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useScroll, leftSlide, rightSlide, fadeIn } from "../../animations";
 
 const Gallery = () => {
   const history = useHistory();
 
+  const [element, controls] = useScroll();
+  const [two, controlTwo] = useScroll();
+  const [three, controlThree] = useScroll();
+
   return (
     <StyledGallery>
-      <div className="gallery-one">
+      <motion.div
+        className="gallery-one"
+        ref={element}
+        variants={leftSlide}
+        initial="initial"
+        animate={controls}
+      >
         <img src={speakerImg} alt="speaker" className="speaker-img" />
         <img
           src={circlePattern}
@@ -30,16 +42,28 @@ const Gallery = () => {
             See Product
           </button>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="gallery-two">
+      <motion.div
+        className="gallery-two"
+        variants={rightSlide}
+        initial="initial"
+        ref={two}
+        animate={controlTwo}
+      >
         <h4>Zx7 Speaker</h4>
         <button onClick={() => history.push("/speakers/zx7-speaker")}>
           See product
         </button>
-      </div>
+      </motion.div>
 
-      <div className="gallery-three">
+      <motion.div
+        className="gallery-three"
+        variants={fadeIn}
+        ref={three}
+        animate={controlThree}
+        initial="initial"
+      >
         <div className="img-container">
           <img src={earphoneImg} alt="earphone" />
         </div>
@@ -50,7 +74,7 @@ const Gallery = () => {
             See Product
           </button>
         </div>
-      </div>
+      </motion.div>
     </StyledGallery>
   );
 };

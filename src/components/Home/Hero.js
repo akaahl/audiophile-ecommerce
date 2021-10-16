@@ -4,12 +4,19 @@ import Navbar from "../Navbar/Navbar";
 import heroBg from "../../assets/home/desktop/image-hero.jpg";
 import tabletHeroBg from "../../assets/home/tablet/image-header.jpg";
 import mobileHeroBg from "../../assets/home/mobile/image-header.jpg";
+import { motion } from "framer-motion";
+import { heroVariants } from "../../animations";
 
 const Hero = () => {
   return (
     <HeroContainer>
       <Navbar />
-      <div className="hero-details">
+      <motion.div
+        className="hero-details"
+        variants={heroVariants}
+        initial="initial"
+        animate="animate"
+      >
         <p className="hero-new">New Product</p>
         <h1>XX 99 Mark II Headphones</h1>
         <p className="hero-intro">
@@ -18,7 +25,7 @@ const Hero = () => {
         </p>
 
         <button>See Product</button>
-      </div>
+      </motion.div>
     </HeroContainer>
   );
 };

@@ -3,8 +3,13 @@ import styled from "styled-components";
 import modelImg from "../../assets/shared/desktop/image-best-gear.jpg";
 import tabletModelImg from "../../assets/shared/tablet/image-best-gear.jpg";
 import mobileModelImg from "../../assets/shared/mobile/image-best-gear.jpg";
+import { motion } from "framer-motion";
+import { useScroll, scaleIn } from "../../animations";
 
 const CompanyDescription = ({ params, itemDetails }) => {
+  const [imgOne, controlOne] = useScroll();
+  const [imgTwo, controlTwo] = useScroll();
+  const [imgThree, controlThree] = useScroll();
   return (
     <StyledContainer params={params} itemDetails={itemDetails}>
       <div className="text-content">
@@ -22,9 +27,17 @@ const CompanyDescription = ({ params, itemDetails }) => {
       </div>
 
       <div className="img-container">
-        <img src={modelImg} alt="model" className="desktop-img" />
-        <img src={tabletModelImg} alt="model" className="tablet-img" />
-        <img src={mobileModelImg} alt="model" className="mobile-img" />
+        <motion.img
+          src={modelImg}
+          alt="model"
+          className="desktop-img"
+          ref={imgOne}
+          variants={scaleIn}
+          animate={controlOne}
+          initial="initial"
+        />
+        <motion.img src={tabletModelImg} alt="model" className="tablet-img" />
+        <motion.img src={mobileModelImg} alt="model" className="mobile-img" />
       </div>
     </StyledContainer>
   );

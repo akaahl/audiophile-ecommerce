@@ -8,6 +8,8 @@ import closeIcon from "../../assets/shared/tablet/icon-close.svg";
 import { useSelector } from "react-redux";
 import CartModal from "./CartModal";
 import Mobile from "./Mobile";
+import { motion } from "framer-motion";
+import { navVariants } from "../../animations";
 
 const Navbar = () => {
   const totalItem = useSelector((state) => state.allData).total;
@@ -27,7 +29,13 @@ const Navbar = () => {
   };
 
   return (
-    <NavContainer totalItem={totalItem} mobile={mobile}>
+    <NavContainer
+      totalItem={totalItem}
+      mobile={mobile}
+      variants={navVariants}
+      initial="initial"
+      animate="animate"
+    >
       <div className="inner-container">
         <div className="left-side">
           <img
@@ -79,7 +87,7 @@ const Navbar = () => {
 
 export default Navbar;
 
-const NavContainer = styled.nav`
+const NavContainer = styled(motion.nav)`
   width: 100%;
   position: relative;
 
