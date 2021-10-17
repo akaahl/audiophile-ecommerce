@@ -8,7 +8,7 @@ Overall, I truly had fun with this challenge. It not only reinforces my CSS skil
 
 ## How It Works (GIF)
 
-![Home page]()
+![Home page](./src/audiophile.gif)
 
 ## Demo Link
 
