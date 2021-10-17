@@ -12,7 +12,7 @@ Overall, I truly had fun with this challenge. It not only reinforces my CSS skil
 
 ## Demo Link
 
-- Live Site URL: [Vercel Live Site Demo]()
+- Live Site URL: [Audiophile Live Demo](https://audiophile-ecommerce-eight.vercel.app/)
 
 ## Table of contents
 
