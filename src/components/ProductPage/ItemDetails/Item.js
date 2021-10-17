@@ -3,6 +3,8 @@ import styled from "styled-components";
 import checkMark from "../../../assets/shared/desktop/check-mark.svg";
 import { useDispatch } from "react-redux";
 import { updateData } from "../../../actions/dataActions";
+import { motion, AnimatePresence } from "framer-motion";
+import { mobileNavVariants } from "../../../animations";
 
 const Item = ({ image, slug, name, description, price }) => {
   const dispatch = useDispatch();
@@ -69,15 +71,23 @@ const Item = ({ image, slug, name, description, price }) => {
             Add to cart
           </button>
 
-          {addToCart && (
-            <div className="notifications">
-              <img src={checkMark} alt="check mark" />
-              <p>
-                You have added <span>{quantity}</span> unit
-                {quantity > 1 ? "s" : ""} of <span>{name}</span>
-              </p>
-            </div>
-          )}
+          <AnimatePresence>
+            {addToCart && (
+              <motion.div
+                className="notifications"
+                variants={mobileNavVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                <img src={checkMark} alt="check mark" />
+                <p>
+                  You have added <span>{quantity}</span> unit
+                  {quantity > 1 ? "s" : ""} of <span>{name}</span>
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </StyledSection>

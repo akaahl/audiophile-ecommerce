@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import arrowRight from "../../assets/shared/desktop/icon-arrow-right.svg";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { fadeIn, mobileNavVariants } from "../../animations";
 
 const Mobile = ({ setMobile }) => {
@@ -73,7 +73,7 @@ export default Mobile;
 
 const StyledMobile = styled(motion.aside)`
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   margin-top: 88px;
   top: 0;
   left: 0;

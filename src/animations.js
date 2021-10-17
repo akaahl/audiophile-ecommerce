@@ -6,7 +6,6 @@ export const useScroll = () => {
   const [element, view] = useInView({ threshold: 0.5 });
   if (view) {
     controls.start("animate");
-    console.log(true);
   }
   return [element, controls];
 };
@@ -28,7 +27,7 @@ export const navVariants = {
 export const heroVariants = {
   initial: {
     opacity: 0,
-    x: -500,
+    x: -200,
   },
   animate: {
     opacity: 1,
@@ -44,13 +43,13 @@ export const heroVariants = {
 export const leftSlide = {
   initial: {
     opacity: 0,
-    x: -500,
+    x: -200,
   },
   animate: {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.7,
       type: "spring",
     },
   },
@@ -65,7 +64,7 @@ export const rightSlide = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.7,
       type: "spring",
     },
   },
@@ -97,6 +96,10 @@ export const scaleIn = {
   },
   animate: {
     scale: 1,
+    transition: {
+      duration: 0.3,
+      type: "spring",
+    },
   },
   exit: {
     scale: 0,

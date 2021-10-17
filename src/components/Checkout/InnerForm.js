@@ -10,6 +10,8 @@ import EmoneyDetails from "./EmoneyDetails";
 import CodDetails from "./CodDetails";
 import OrderConfirmation from "./OrderConfirmation";
 import { ConnectedFocusError } from "focus-formik-error";
+import { motion, AnimatePresence } from "framer-motion";
+import { leftSlide, rightSlide } from "../../animations";
 
 const InnerForm = () => {
   const [modal, setModal] = useState(false);
@@ -46,7 +48,12 @@ const InnerForm = () => {
         return (
           <StyledInnerForm as={Form}>
             <ConnectedFocusError />
-            <div className="left-side">
+            <motion.div
+              className="left-side"
+              variants={leftSlide}
+              initial="initial"
+              animate="animate"
+            >
               <h2>Checkout</h2>
 
               <div className="billing">
@@ -178,14 +185,21 @@ const InnerForm = () => {
                 </div>
 
                 <div className="bottom">
-                  {formik.values.method === "e-money" && <EmoneyDetails />}
+                  <AnimatePresence exitBeforeEnter>
+                    {formik.values.method === "e-money" && <EmoneyDetails />}
 
-                  {formik.values.method === "cod" && <CodDetails />}
+                    {formik.values.method === "cod" && <CodDetails />}
+                  </AnimatePresence>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="right-side">
+            <motion.div
+              className="right-side"
+              variants={rightSlide}
+              initial="initial"
+              animate="animate"
+            >
               <h2>Summary</h2>
 
               <ul>
@@ -238,15 +252,17 @@ const InnerForm = () => {
                   Continue &amp; Pay
                 </button>
               </div>
-            </div>
+            </motion.div>
 
-            {modal && (
-              <OrderConfirmation
-                cart={cart}
-                grandTotal={grandTotal}
-                setModal={setModal}
-              />
-            )}
+            <AnimatePresence exitBeforeEnter>
+              {modal && (
+                <OrderConfirmation
+                  cart={cart}
+                  grandTotal={grandTotal}
+                  setModal={setModal}
+                />
+              )}
+            </AnimatePresence>
           </StyledInnerForm>
         );
       }}

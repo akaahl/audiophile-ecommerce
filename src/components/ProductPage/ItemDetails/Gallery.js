@@ -1,10 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import { useScroll, fadeIn } from "../../../animations";
 
 const Gallery = ({ gallery }) => {
   const { first, second, third } = gallery;
+  const [element, control] = useScroll();
+
   return (
-    <StyledGallery>
+    <StyledGallery
+      ref={element}
+      variants={fadeIn}
+      initial="initial"
+      animate={control}
+    >
       <div className="left-side">
         <img
           src={process.env.PUBLIC_URL + first.desktop}
@@ -37,7 +46,7 @@ const Gallery = ({ gallery }) => {
 
 export default Gallery;
 
-const StyledGallery = styled.div`
+const StyledGallery = styled(motion.div)`
   height: 530px;
   margin-top: 150px;
   display: flex;

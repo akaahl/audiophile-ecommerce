@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from "uuid";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateData } from "../../actions/dataActions";
+import { motion } from "framer-motion";
+import { fadeIn, scaleIn } from "../../animations";
 
 const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
   const [viewMore, setViewMore] = useState(false);
@@ -31,8 +33,16 @@ const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
         document.body.style.overflowY = "initial";
         resetCart();
       }}
+      variants={fadeIn}
+      initial="initial"
+      animate="animate"
+      exit="exit"
     >
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
+      <motion.div
+        className="modal"
+        onClick={(e) => e.stopPropagation()}
+        variants={scaleIn}
+      >
         <img src={checkMark} alt="check mark" className="check-mark" />
 
         <h2 className="order-message">Thank you for your order</h2>
@@ -63,10 +73,12 @@ const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
                 ))}
             </ul>
 
-            <button
-              className="view-more-btn"
-              onClick={() => setViewMore(true)}
-            >{`and ${cart.length} other item(s)`}</button>
+            {cart.length > 1 && (
+              <button
+                className="view-more-btn"
+                onClick={() => setViewMore(true)}
+              >{`and ${cart.length} other item(s)`}</button>
+            )}
             <button
               className="view-less-btn"
               onClick={() => setViewMore(false)}
@@ -94,7 +106,7 @@ const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
         >
           Back To Home
         </button>
-      </div>
+      </motion.div>
     </StyledContainer>,
     document.getElementById("portal")
   );
@@ -102,13 +114,13 @@ const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
 
 export default OrderConfirmation;
 
-const StyledContainer = styled.aside`
+const StyledContainer = styled(motion.aside)`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
   display: grid;
   place-items: center;
   overflow-y: scroll;

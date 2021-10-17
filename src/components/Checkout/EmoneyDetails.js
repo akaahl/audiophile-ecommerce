@@ -1,10 +1,18 @@
 import React from "react";
 import { ErrorMessage, Field } from "formik";
 import TextError from "./TextError";
+import { motion } from "framer-motion";
+import { scaleIn } from "../../animations";
 
 const EmoneyDetails = () => {
   return (
-    <div className="e-money-details">
+    <motion.div
+      className="e-money-details"
+      variants={scaleIn}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <div className="e-money-number">
         <div className="top">
           <label htmlFor="eNumber">e-Money Number</label>
@@ -33,7 +41,7 @@ const EmoneyDetails = () => {
           className="input-el"
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
