@@ -43,30 +43,22 @@ export const heroVariants = {
 export const leftSlide = {
   initial: {
     opacity: 0,
-    x: -200,
+    x: -30,
   },
   animate: {
     opacity: 1,
     x: 0,
-    transition: {
-      duration: 0.7,
-      type: "spring",
-    },
   },
 };
 
 export const rightSlide = {
   initial: {
     opacity: 0,
-    x: 500,
+    x: 30,
   },
   animate: {
     opacity: 1,
     x: 0,
-    transition: {
-      duration: 0.7,
-      type: "spring",
-    },
   },
 };
 

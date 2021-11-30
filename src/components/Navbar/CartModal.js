@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDom from "react-dom";
+import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { updateData } from "../../actions/dataActions";
 import { motion } from "framer-motion";
 import { fadeIn, scaleIn } from "../../animations";
+import EmptyCart from "./EmptyCart";
 
 const CartModal = ({ setModal }) => {
   const history = useHistory();
@@ -55,13 +56,14 @@ const CartModal = ({ setModal }) => {
     dispatch(updateData(updatedAllData));
   };
 
-  return ReactDom.createPortal(
+  return createPortal(
     <StyledModal
       onClick={handleModal}
       variants={fadeIn}
       initial="initial"
       animate="animate"
       exit="exit"
+      totalItems={totalItems}
     >
       <motion.div
         className="modal-container"
@@ -73,39 +75,43 @@ const CartModal = ({ setModal }) => {
           <button onClick={handleRemoveAll}>Remove all</button>
         </div>
 
-        {itemsInCart.map((item) => (
-          <div className="mid" key={uuidv4()}>
-            <div className="mid-left">
-              <img src={item.image} alt={item.name} />
-              <div className="mid-left-details">
-                <span className="display-name">{item.displayName}</span>
-                <span className="price">{`$${item.price.toLocaleString()}`}</span>
+        {itemsInCart.length ? (
+          itemsInCart.map((item) => (
+            <div className="mid" key={uuidv4()}>
+              <div className="mid-left">
+                <img src={item.image} alt={item.name} />
+                <div className="mid-left-details">
+                  <span className="display-name">{item.displayName}</span>
+                  <span className="price">{`$${item.price.toLocaleString()}`}</span>
+                </div>
+              </div>
+
+              <div className="mid-right">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const sign = e.target.textContent;
+                    handleQuantity(sign, item.quantity, item.name);
+                  }}
+                >
+                  -
+                </button>
+                <p>{item.quantity}</p>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const sign = e.target.textContent;
+                    handleQuantity(sign, item.quantity, item.name);
+                  }}
+                >
+                  +
+                </button>
               </div>
             </div>
-
-            <div className="mid-right">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  const sign = e.target.textContent;
-                  handleQuantity(sign, item.quantity, item.name);
-                }}
-              >
-                -
-              </button>
-              <p>{item.quantity}</p>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  const sign = e.target.textContent;
-                  handleQuantity(sign, item.quantity, item.name);
-                }}
-              >
-                +
-              </button>
-            </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <EmptyCart />
+        )}
 
         <div className="bottom">
           <p className="total-text">Total</p>
@@ -115,9 +121,11 @@ const CartModal = ({ setModal }) => {
         <button
           className="checkout-btn"
           onClick={() => {
-            history.push("/checkout");
-            document.body.style.overflow = "scroll";
-            setModal(false);
+            if (totalItems) {
+              history.push("/checkout");
+              document.body.style.overflow = "scroll";
+              setModal(false);
+            }
           }}
         >
           Checkout
@@ -273,7 +281,7 @@ const StyledModal = styled(motion.aside)`
       font-weight: 600;
       color: #ffffff;
       text-transform: uppercase;
-      cursor: pointer;
+      cursor: ${({ totalItems }) => (totalItems ? "pointer" : "not-allowed")};
       transition: all 0.2s ease-in-out;
 
       &:hover {

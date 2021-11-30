@@ -75,7 +75,11 @@ const Navbar = () => {
           }}
         >
           <img src={cartIcon} alt="cart" />
-          {totalItem && <span>{totalItem}</span>}
+          {totalItem && (
+            <div className="span-wrapper">
+              <span>{totalItem}</span>
+            </div>
+          )}
         </button>
 
         <AnimatePresence>
@@ -146,17 +150,24 @@ const NavContainer = styled(motion.nav)`
       z-index: 10;
       margin-right: ${({ totalItem }) => (totalItem ? "10px" : "initial")};
 
-      span {
+      .span-wrapper {
+        height: 25px;
+        width: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #d87d4a;
+        border-radius: 50%;
+        position: absolute;
         top: -15px;
         right: -15px;
-        padding: ${({ totalItem }) =>
-          totalItem > 10 ? "3px 7px" : "3px 10px"};
-        border-radius: 50%;
-        background-color: #d87d4a;
-        color: #ffffff;
-        font-weight: 600;
-        position: absolute;
         z-index: 1;
+
+        span {
+          color: #ffffff;
+          font-size: 12px;
+          font-weight: 600;
+        }
       }
     }
   }

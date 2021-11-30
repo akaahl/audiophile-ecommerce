@@ -70,7 +70,7 @@ In my opinion, this project was not substantially as difficult as the level indi
 
 #### Using Promise.all():-
 
-Fetching data from a single end-point is normally a breeze, and I could simply use the conventional fetch API and store the data into a variable. But the problem arises, when there is a need to fetch multiple data from multiple end-points. This is where Promise.all() solves this issue; it takes in an array of promises, executes them, and wait until all of the operations are done. This is a very powerful way of handling multiple asynchronous operations; not just limited to fetching data. Below is the code snippets in which I implemented this method:-
+Fetching data from a single end-point is normally a breeze, and I could simply use the conventional fetch API and store the data into a variable. But the problem arises when there is a need to fetch multiple data from multiple end-points. This is where Promise.all() solves this issue; it takes in an array of promises, executes them in parallel, and wait until all of the operations are done. This is a very powerful way of handling multiple asynchronous operations; not just limited to fetching data. Below is the code snippets in which I implemented this method:-
 
 ```
   Promise.all([
@@ -175,7 +175,7 @@ import { ConnectedFocusError } from "focus-formik-error";
 
 The main components of Formik are: Formik, Form, Field, and ErrorMessage. The top level Formik component is used to encapsulates the entire form, which contains the props 'formik'. The Form component is used as a substitute for the html <form> element itself, which inherits the formik props that can be used throughout the form.
 
-Meanwhile, the Field component is a substitute for html <input> element, and ErrorMessage component is used to display error message whenever the Field input is "touched" without entring data, during form submission, and so forth. As can be seen, there is no need to hook up onChange handlers, and bind the value to each Field component. The Formik component automatically does this for us behind the scenes, which makes it very manageable for a large form.
+Meanwhile, the Field component is a substitute for html <input> element, and ErrorMessage component is used to display error message whenever the Field input is "touched" without entering user's data during form submission, and so forth. As can be seen, there is no need to hook up onChange handlers, and bind the value to each Field component. The Formik component automatically does this for us behind the scenes, which makes it very manageable for a large form.
 
 Additionally, I have also used another library, which is the 'Focus Formik Error', that automatically scrolls to the first input element that has a validation error. This results in a great user experience as user does not have to frustratingly look for the affected Field component.
 
@@ -230,7 +230,7 @@ I do not have any plans to integrate back-end functionality to this app, nor add
 
 ### Useful resources
 
-- [Formik Tutorial](https://www.youtube.com/playlist?list=PLC3y8-rFHvwiPmFbtzEWjESkqBVDbdgGu) - This is a great in-depth tutorial on Formik. I teaches the most basic way of using Formik all the to the advanced level. It also includes Yup integration with Formik. This is truly a great resource.
+- [Formik Tutorial](https://www.youtube.com/playlist?list=PLC3y8-rFHvwiPmFbtzEWjESkqBVDbdgGu) - This is a great in-depth tutorial on Formik. It teaches the most basic way of using Formik all the to the advanced level. It also includes Yup integration with Formik. This is truly a great resource.
 
 - [Promise.all() MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) - An official MDN documentation on how to use Promise.all().
 

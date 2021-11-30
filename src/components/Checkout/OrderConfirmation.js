@@ -77,7 +77,7 @@ const OrderConfirmation = ({ cart, grandTotal, setModal }) => {
               <button
                 className="view-more-btn"
                 onClick={() => setViewMore(true)}
-              >{`and ${cart.length} other item(s)`}</button>
+              >{`and ${cart.length - 1} other item(s)`}</button>
             )}
             <button
               className="view-less-btn"

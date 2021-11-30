@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { initialValues, validationSchema } from "./utils";
-import { StyledInnerForm } from "./styles.js";
+import { ConnectedFocusError } from "focus-formik-error";
 import TextError from "./TextError";
+import { StyledInnerForm } from "./styles.js";
 import RadioGroups from "./RadioGroups";
 import EmoneyDetails from "./EmoneyDetails";
 import CodDetails from "./CodDetails";
 import OrderConfirmation from "./OrderConfirmation";
-import { ConnectedFocusError } from "focus-formik-error";
 import { motion, AnimatePresence } from "framer-motion";
 import { leftSlide, rightSlide } from "../../animations";
 
